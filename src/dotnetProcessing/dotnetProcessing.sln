@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetProcessing", "dotnetProcessing\dotnetProcessing.csproj", "{12FB85D3-727B-4E58-9A5A-805356011FDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetProcessingManualTest", "..\..\tests\dotnetProcessingManualTest\dotnetProcessingManualTest.csproj", "{3B723110-F7ED-427E-ADA6-232E533812B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12FB85D3-727B-4E58-9A5A-805356011FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12FB85D3-727B-4E58-9A5A-805356011FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12FB85D3-727B-4E58-9A5A-805356011FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12FB85D3-727B-4E58-9A5A-805356011FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B723110-F7ED-427E-ADA6-232E533812B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B723110-F7ED-427E-ADA6-232E533812B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B723110-F7ED-427E-ADA6-232E533812B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B723110-F7ED-427E-ADA6-232E533812B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51060ED4-3574-433F-8B1A-E62FD160C9B3}
+	EndGlobalSection
+EndGlobal
