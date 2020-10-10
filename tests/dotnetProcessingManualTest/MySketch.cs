@@ -9,19 +9,19 @@ namespace dotnetProcessingManualTest
     class MySketch : Sketch
     {   
         float n = 0;
-        const float pointSize = 40;
-        float ellipseRadius= 0.08f * pointSize;
+        const float radius = 40;
+        float ellipseRadius= 0.08f * radius;
         public override void Draw()
         {
-            background(0);
+            background(0,0,.3f);
             translate(width/2, height/2);
-            
-            
-            //rotate(n * 0.3);
+
+
+            ///rotate(n * 0.3);
             for (int i = 0; i < n; i++)
             {
                 float a = i * radians(137.5f);
-                float r = (float)(pointSize * Math.Sqrt(radians(i)));
+                float r = (float)(radius * Math.Sqrt(radians(i)));
                 float x = (float)(r * Math.Cos(a));
                 float y = (float)(r * Math.Sin(a));
                 float hu = (i / 3) % 360;
@@ -29,8 +29,8 @@ namespace dotnetProcessingManualTest
                 noStroke();
                 ellipse(x, y, ellipseRadius, ellipseRadius);
             }
-
-            n += 5;
+            
+            n+=5;
         }
 
         public override void Setup()

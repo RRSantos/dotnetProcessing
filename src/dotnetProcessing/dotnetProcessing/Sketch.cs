@@ -145,7 +145,6 @@ namespace dotnetProcessing
             }
             
             window.Draw(circle);
-            
         }
 
         protected void colorMode(ColorMode colorMode)
