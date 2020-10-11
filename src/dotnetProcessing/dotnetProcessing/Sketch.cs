@@ -8,8 +8,8 @@ namespace dotnetProcessing
 {
     public abstract class Sketch
     {
-        private const int DEFAULT_WIDTH = 100;
-        private const int DEFAULT_HEIGHT = 100;
+        private const int DEFAULT_WIDTH = 640;
+        private const int DEFAULT_HEIGHT = 480;
         private readonly Color DEFAULT_BACKGROUND_COLOR = Color.Black;
         private readonly Color DEFAULT_FILL_COLOR = Color.White;
         private const float DEFAULT_STROKE_WEIGHT = 1f;
@@ -18,13 +18,24 @@ namespace dotnetProcessing
         private float y;
         private float z;
 
+        private float angle;
 
         protected RenderWindow window;
         protected Color backgroundColor;
         protected Color fillColor;
+        protected Color strokeColor;
         protected uint width;
         protected uint height;
         protected float strokeWeight;
+
+        private Vector2f applyRotation(float x, float y)
+        {
+            double newX = this.x + x * Math.Cos(angle) - y * Math.Sin(angle);
+            double newY = this.y + x * Math.Sin(angle) + y * Math.Cos(angle);
+
+            return new Vector2f((float)newX, (float)newY);
+        }
+        
 
         protected float radians(float degrees)
         {
@@ -46,14 +57,21 @@ namespace dotnetProcessing
         }
 
         private void initializeWindow()
-        {
+        {   
+            if (window != null)
+            {
+                window.Dispose();
+            }
+
             VideoMode video = new VideoMode(width, height);
-            window = new RenderWindow(video, "dotnetProcessing");
+            ContextSettings settings = new ContextSettings();
+            settings.AntialiasingLevel = 0;
+            window = new RenderWindow(video, "dotnetProcessing", Styles.Default, settings);
+            
             window.SetFramerateLimit(60);
             window.Closed += (_, __) => window.Close();
             window.KeyReleased += Window_KeyReleased;
-
-            window.Clear(backgroundColor);
+            
         }
 
         protected void noStroke()
@@ -72,11 +90,14 @@ namespace dotnetProcessing
             x = 0;
             y = 0;
             z = 0;
+            angle = 0;
+            initializeWindow();
         }
         protected void size(uint width, uint height)
         {
             this.width = width;
-            this.height = height;
+            this.height = height;            
+            initializeWindow();
         }
 
         protected void fill(float gray)
@@ -99,24 +120,48 @@ namespace dotnetProcessing
             fillColor = ColorHelper.NewColor(v1, v2, v3, alpha);
         }
 
+
+        protected void stroke(float gray)
+        {
+            strokeColor = ColorHelper.NewColor(gray);
+        }
+
+        protected void stroke(float gray, byte alpha)
+        {
+            strokeColor = ColorHelper.NewColor(gray, alpha);
+        }
+
+        protected void stroke(float v1, float v2, float v3)
+        {
+            strokeColor = ColorHelper.NewColor(v1, v2, v3);
+        }
+
+        protected void stroke(float v1, float v2, float v3, byte alpha)
+        {
+            strokeColor = ColorHelper.NewColor(v1, v2, v3, alpha);
+        }
+
+
         protected void background(float gray)
         {
-            this.backgroundColor = ColorHelper.NewColor(gray);
+            background(gray, 255);
         }
 
         protected void background(float gray, byte alpha)
         {
             this.backgroundColor = ColorHelper.NewColor(gray,alpha);
+            window.Clear(backgroundColor);
         }
 
         protected void background(float v1, float v2, float v3)
         {
-            this.backgroundColor = ColorHelper.NewColor(v1, v2, v3);
+            background(v1, v2, v3, 255);            
         }
 
         protected void background(float v1, float v2, float v3, byte alpha)
         {   
-            this.backgroundColor = Helpers.ColorHelper.NewColor(v1,v2,v3,alpha);
+            this.backgroundColor = ColorHelper.NewColor(v1,v2,v3,alpha);
+            window.Clear(backgroundColor);
         }
 
         protected void translate(float x, float y, float z)
@@ -135,16 +180,56 @@ namespace dotnetProcessing
         {
             CircleShape circle = new CircleShape(width)
             {
-                Position = new Vector2f(this.x + x, this.y + y),
+                Position = applyRotation(x, y),
                 FillColor = fillColor,
-                OutlineThickness = strokeWeight
+                OutlineThickness = strokeWeight,
+                OutlineColor = strokeColor
             };
-            if (width != height)
-            {
-                circle.Scale = new Vector2f(1, height / width);
-            }
-            
+
+            circle.Scale = new Vector2f(1, height / width);
+
             window.Draw(circle);
+        }
+
+        protected void circle(float x, float y, float radius)
+        {
+            CircleShape circle = new CircleShape(radius*2)
+            {   
+                Position = applyRotation(x, y),
+                FillColor = fillColor,
+                OutlineThickness = strokeWeight,
+                OutlineColor = strokeColor
+            };
+
+            window.Draw(circle);
+        }
+
+        protected void rect(float x, float y, float width, float heigth)
+        {
+            RectangleShape rectangle = new RectangleShape(new Vector2f(width, heigth))
+            {   
+                Position = applyRotation(x, y),
+                FillColor = fillColor,
+                OutlineThickness = strokeWeight,
+                OutlineColor = strokeColor
+            };
+
+            window.Draw(rectangle);
+            
+        }
+
+        public void point(int x, int y)
+        {
+            Vertex newPoint = new Vertex(new Vector2f(this.x+x, this.y + y), strokeColor);
+            Vertex[] points = new Vertex[1];
+            points[0] = newPoint;
+            window.Draw(points, PrimitiveType.Points);
+        }
+
+
+        protected void square(float x, float y, float sideLength)
+        {
+            rect(x, y, sideLength, sideLength);
         }
 
         protected void colorMode(ColorMode colorMode)
@@ -152,21 +237,22 @@ namespace dotnetProcessing
             ColorHelper.SetColorMode(colorMode);
         }
 
-
         public void Run()
         {
             Setup();
 
-            initializeWindow();
-
             while (window.IsOpen)
             {
                 window.DispatchEvents();
-                window.Clear(backgroundColor);
                 Draw();
                 window.Display();
             }
             
+        }
+
+        protected void rotate(float angleInRadians)
+        {
+            this.angle = angleInRadians;
         }
 
         public abstract void Setup();
