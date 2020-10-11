@@ -21,8 +21,8 @@ namespace dotnetProcessingManualTest
         Random random = new Random();
         Point lastPoint;
         int pointRadius = 3;
-        double distanceFactor = 1/4d;// Math.E/4f;
-        int vertexCount = 3;
+        double distanceFactor = 1/2d;
+        int vertexCount = 8;
 
         private void setColorBasedOnIndex(int index)
         {
@@ -60,12 +60,15 @@ namespace dotnetProcessingManualTest
 
         public override void Setup()
         {
-            size(800, 600);
+            //size(800, 800);
+            title("teste do ramos");
 
             //setupPoligonoRegular();
-            setupPhylloTaxis();
-            //setupChaosGameSquare();
+            //setupPhylloTaxis();
+            setupChaosGameSquare();
             //translate(width / 2, height / 2);
+            //background(0);
+            //rect(10, 10, 40, 33);
 
 
         }        
@@ -73,14 +76,15 @@ namespace dotnetProcessingManualTest
         public override void Draw()
         {
             //drawPoligonoRegular();
-            drawPhylloTaxis();
-            //drawChaosGameSquare();
+            //drawPhylloTaxis();
+            drawChaosGameSquare();
 
 
-            //background(20);
-            //fill(100, 50, 200);
-            //rotate(radians(n));            
-            //rect(100,100, 100, 40);
+            //background(0);
+            //fill(n % 256);
+            //rotate(radians(n));
+            //rect(10, 10, 40, 33);
+            title($"teste do ramos. n: {n}");
 
             //n++;
 
@@ -110,15 +114,15 @@ namespace dotnetProcessingManualTest
         }
 
         private void setupChaosGameSquare()
-        {
-            distanceFactor = 0.45;
-            vertexCount = 5;
+        {   
+            distanceFactor = 0.5d;
+            vertexCount = 7;
             setupPoligonoRegular();
         }
 
         private void drawPoligonoRegular()
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 500; i++)
             {
                 int nextIndex = random.Next(points.Count);
 
@@ -138,9 +142,20 @@ namespace dotnetProcessingManualTest
 
         private void setupPoligonoRegular()
         {
+            size(800, 800);
             colorMode(ColorMode.RGB);
 
-            translate(width / 2, height / 2);            
+            translate(width / 2, height / 2);
+            float angle;
+            if (vertexCount % 2 == 1)
+            {
+                angle = (360f / vertexCount) - 90;
+            }
+            else
+            {
+                angle = (180 - (360f / vertexCount))/2f;
+            }
+            rotate(radians(angle));
             double angleOffset = 2 * Math.PI / vertexCount;
             double initialAngle = 0;
             double radius = (width / 2d) - 10;
@@ -160,7 +175,7 @@ namespace dotnetProcessingManualTest
             for (int i = 0; i < points.Count; i++)
             {
                 setColorBasedOnIndex(i);
-                ellipse(points[i].X, points[i].Y, pointRadius, pointRadius);
+                circle(points[i].X, points[i].Y, pointRadius);
 
             }
 
@@ -170,11 +185,12 @@ namespace dotnetProcessingManualTest
             lastPoint = new Point(randomX, randomY);
             fill(255, 0, 255);
             stroke(255, 0, 255);
-            ellipse(lastPoint.X, lastPoint.Y, pointRadius, pointRadius);
+            circle(lastPoint.X, lastPoint.Y, pointRadius);
         }
 
         protected void setupPhylloTaxis()
         {
+            size(600, 600);
             colorMode(ColorMode.HSB);
             noStroke();
         }
@@ -185,7 +201,7 @@ namespace dotnetProcessingManualTest
             translate(width / 2, height / 2);
 
 
-            rotate(n * 0.3f);
+            rotate(radians(n * 0.3f));
             for (int i = 0; i < n; i++)
             {
                 float a = i * radians(137.5f);
@@ -195,7 +211,7 @@ namespace dotnetProcessingManualTest
                 float hu = (i / 3) % 360;
                 fill(hu, 1, 1);
                 noStroke();
-                ellipse(x, y, ellipseRadius, ellipseRadius);
+                circle(x, y, ellipseRadius);
             }
 
             n += 5;
