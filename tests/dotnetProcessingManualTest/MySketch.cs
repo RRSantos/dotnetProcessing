@@ -3,8 +3,7 @@ using dotnetProcessing.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
+
 
 namespace dotnetProcessingManualTest
 {

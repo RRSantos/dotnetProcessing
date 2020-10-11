@@ -1,8 +1,6 @@
 ﻿using dotnetProcessing.Helpers;
 using SFML.Graphics;
-using SFML.System;
 using SFML.Window;
-using System;
 
 namespace dotnetProcessing
 {
@@ -115,10 +113,6 @@ namespace dotnetProcessing
                     window.Display();
                     needsRefresh = false;
                 }
-                    
-                
-
-
             }
             
         }        
