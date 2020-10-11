@@ -15,6 +15,8 @@ namespace dotnetProcessing
         private readonly RenderWindow window;
         private readonly Transformation transformation;
 
+        private readonly VertexArray shapePoints = new VertexArray(PrimitiveType.LineStrip);
+
 
         private Color strokeColor;
         private Color fillColor;
@@ -141,7 +143,7 @@ namespace dotnetProcessing
 
         #endregion
 
-        #region background
+        #region Background
 
         public void SetBackgroundColor(float gray)
         {
@@ -166,6 +168,24 @@ namespace dotnetProcessing
         }
 
         #endregion
+
+
+        public void ClearShape()
+        {
+            shapePoints.Clear();
+        }
+
+        public void AddShapePoint(float x, float y )
+        {
+            Vector2f shapePoint = transformation.GetTransformedVector(x, y);
+            shapePoints.Append(new Vertex(shapePoint, strokeColor));
+        }
+
+        public void DrawShape()
+        {
+            window.Draw(shapePoints);
+            ClearShape();
+        }
 
     }
 }

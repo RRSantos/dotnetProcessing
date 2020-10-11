@@ -1,4 +1,7 @@
 ﻿
+using SFML.System;
+using System;
+
 namespace dotnetProcessing
 {
     partial class Sketch
@@ -98,6 +101,22 @@ namespace dotnetProcessing
         protected void background(float v1, float v2, float v3, byte alpha)
         {
             drawing.SetBackgroundColor(v1, v2, v3, alpha);
+            needsRefresh = true;
+        }
+
+        protected void beginShape()
+        {
+            drawing.ClearShape();
+        }
+
+        protected void vertex(float x, float y)
+        {
+            drawing.AddShapePoint(x, y);
+        }
+
+        protected void endShape()
+        {
+            drawing.DrawShape();
             needsRefresh = true;
         }
     }

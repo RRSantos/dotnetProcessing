@@ -1,6 +1,7 @@
 ﻿using dotnetProcessing.Helpers;
 using SFML.Graphics;
 using SFML.Window;
+using System;
 
 namespace dotnetProcessing
 {
@@ -23,7 +24,6 @@ namespace dotnetProcessing
         
         protected uint width;
         protected uint height;
-
 
 
         private void Window_KeyReleased(object sender, KeyEventArgs e)
@@ -69,9 +69,7 @@ namespace dotnetProcessing
             windowTitle = newTitle;
             window.SetTitle(windowTitle);
         }
-
-
-        #region Utils
+        
         protected void colorMode(ColorMode colorMode)
         {
             ColorHelper.SetColorMode(colorMode);
@@ -86,8 +84,6 @@ namespace dotnetProcessing
         {
             return ConvertionHelper.RadiansToDegrees(radians);
         }
-        #endregion
-
 
 
         public Sketch()
@@ -115,7 +111,7 @@ namespace dotnetProcessing
                 }
             }
             
-        }        
+        }
 
         public abstract void Setup();
         public abstract void Draw();
