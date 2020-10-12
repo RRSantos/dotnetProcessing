@@ -2,7 +2,7 @@
 
 namespace dotnetProcessing.Helpers
 {
-    static class ConvertionHelper
+    public static class ConvertionHelper
     {
         public static float DegreesToRadians(float degrees)
         {
