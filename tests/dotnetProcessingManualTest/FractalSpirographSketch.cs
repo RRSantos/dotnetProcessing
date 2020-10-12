@@ -3,8 +3,6 @@ using dotnetProcessing.Helpers;
 using SFML.System;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Text;
 
 namespace dotnetProcessingManualTest
 {
@@ -43,7 +41,7 @@ namespace dotnetProcessingManualTest
             angle = (float)(-Math.PI / 2f);
             int actualLevel = getActualLevel();
             speed = ConvertionHelper.DegreesToRadians((float)Math.Pow(k, actualLevel - 1)/10f);
-            //speed = (float)Math.Pow(k, actualLevel - 1) / 50f;
+            
         }
 
         public Orbit(float x, float y, float radius) : this(x, y, radius, null)
@@ -53,7 +51,7 @@ namespace dotnetProcessingManualTest
 
         public Orbit CreateChild()
         {
-            float childRadius = this.Radius / 3;
+            float childRadius = this.Radius/3;
             Child = new Orbit(this.X + this.Radius + childRadius, 0, childRadius, this);
             return Child;
         }
@@ -87,7 +85,7 @@ namespace dotnetProcessingManualTest
                     moon.Update();
                     if (i == samples - 1)
                     {
-                        stroke(255);
+                        stroke(100);
                         circle(moon.X, moon.Y, moon.Radius);
                     }
                     moon = moon.Child;
@@ -116,11 +114,11 @@ namespace dotnetProcessingManualTest
             strokeWeight(1f);
             noFill();
 
-            float radius = width / 6;
+            float radius = width / 4;
 
             sun = new Orbit(0, 0, radius);
             Orbit moon = sun;
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 10; i++)
             {
                 moon = moon.CreateChild();
             }
