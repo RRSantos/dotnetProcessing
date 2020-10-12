@@ -58,6 +58,11 @@ namespace dotnetProcessing
         {
             strokeColor = ColorHelper.NewColor(v1, v2, v3, alpha);
         }
+
+        public void SetStrokeWeight(float weight)
+        {
+            strokeWeight = weight;
+        }
         #endregion
 
         #region Fill
@@ -81,6 +86,11 @@ namespace dotnetProcessing
             fillColor = ColorHelper.NewColor(v1, v2, v3, alpha);
         }
 
+        public void SetNoFillColor()
+        {
+            fillColor = ColorHelper.NewColor(0, 0, 0, 0);
+        }
+
         #endregion
 
         #region Shapes
@@ -89,19 +99,20 @@ namespace dotnetProcessing
         {
             CircleShape circleShape = new CircleShape(radius)
             {
-                Position = transformation.GetTransformedVector(x, y),
+                //Position = transformation.GetTransformedVector(x-radius, y-radius),
                 FillColor = fillColor,
                 OutlineThickness = strokeWeight,
                 OutlineColor = strokeColor,
                 Rotation = ConvertionHelper.RadiansToDegrees(transformation.Angle)
             };
-
+            
             return circleShape;
         }
 
         public void DrawEllipse(float x, float y, float width, float height)
         {
             CircleShape circle = createCircleShape(x, y, width);
+            circle.Position = transformation.GetTransformedVector(x - width, y - height);
             circle.Scale = new Vector2f(1, height / width);
             window.Draw(circle);
         }
@@ -118,6 +129,7 @@ namespace dotnetProcessing
         {
 
             CircleShape circle = createCircleShape(x, y, radius);
+            circle.Position = transformation.GetTransformedVector(x - radius, y - radius);
             window.Draw(circle);
         }
 

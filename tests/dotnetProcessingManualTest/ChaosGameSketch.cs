@@ -7,13 +7,8 @@ using System.Drawing;
 
 namespace dotnetProcessingManualTest
 {
-    class MySketch : Sketch
+    class ChaosGameSketch : Sketch
     {   
-        //Phyllotaxis
-        float n = 0;
-        const float radius = 50;
-        const float ellipseRadius= 0.08f * radius;
-
         
         //Poligono
         List<Point> points = new List<Point>();
@@ -59,33 +54,17 @@ namespace dotnetProcessingManualTest
 
         public override void Setup()
         {
-            //size(800, 800);
+            
             title("teste do ramos");
-
-            //setupPoligonoRegular();
-            //setupPhylloTaxis();
+            //setupPoligonoRegular();            
             setupChaosGameSquare();
-            //translate(width / 2, height / 2);
-            //background(0);
-            //rect(10, 10, 40, 33);
-
 
         }        
 
         public override void Draw()
         {
-            //drawPoligonoRegular();
-            //drawPhylloTaxis();
+            //drawPoligonoRegular();            
             drawChaosGameSquare();
-
-
-            //background(0);
-            //fill(n % 256);
-            //rotate(radians(n));
-            //rect(10, 10, 40, 33);
-            title($"teste do ramos. n: {n}");
-
-            //n++;
 
         }
 
@@ -185,35 +164,6 @@ namespace dotnetProcessingManualTest
             fill(255, 0, 255);
             stroke(255, 0, 255);
             circle(lastPoint.X, lastPoint.Y, pointRadius);
-        }
-
-        protected void setupPhylloTaxis()
-        {
-            size(600, 600);
-            colorMode(ColorMode.HSB);
-            noStroke();
-        }
-
-        protected void drawPhylloTaxis()
-        {
-            background(0, 0, .1f);
-            translate(width / 2, height / 2);
-
-
-            rotate(radians(n * 0.3f));
-            for (int i = 0; i < n; i++)
-            {
-                float a = i * radians(137.5f);
-                float r = (float)(radius * Math.Sqrt(radians(i)));
-                float x = (float)(r * Math.Cos(a));
-                float y = (float)(r * Math.Sin(a));
-                float hu = (i / 3) % 360;
-                fill(hu, 1, 1);
-                noStroke();
-                circle(x, y, ellipseRadius);
-            }
-
-            n += 5;
-        }
+        }        
     }
 }

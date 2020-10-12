@@ -31,6 +31,13 @@ namespace dotnetProcessing
             drawing.SetStrokeColor(v1, v2, v3, alpha);
         }
 
+        protected void strokeWeight(float weight)
+        {
+            drawing.SetStrokeWeight(weight);
+        }
+
+        
+
         protected void fill(float gray)
         {
             drawing.SetFillColor(gray);
@@ -49,6 +56,11 @@ namespace dotnetProcessing
         protected void fill(float v1, float v2, float v3, byte alpha)
         {
             drawing.SetFillColor(v1, v2, v3, alpha);
+        }
+
+        protected void noFill()
+        {
+            drawing.SetNoFillColor();
         }
 
         protected void circle(float x, float y, float radius)
