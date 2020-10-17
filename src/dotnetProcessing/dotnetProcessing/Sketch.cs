@@ -85,6 +85,11 @@ namespace dotnetProcessing
             return ConvertionHelper.RadiansToDegrees(radians);
         }
 
+        protected void frameRate(int frameRate)
+        {
+            window.SetFramerateLimit((uint)frameRate);
+        }
+
 
         public Sketch()
         {
