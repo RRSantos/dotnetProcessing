@@ -7,7 +7,7 @@ namespace dotnetProcessingManualTest
     {
         static void Main(string[] args)
         {
-            Sketch sketch = new PerlinNoiseSketch();
+            Sketch sketch = new RandomWalkerSketch();
             sketch.Run();
         }
     }

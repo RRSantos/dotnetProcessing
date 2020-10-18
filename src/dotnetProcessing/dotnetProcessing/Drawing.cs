@@ -119,10 +119,24 @@ namespace dotnetProcessing
 
         public void DrawPoint(int x, int y)
         {
-            Vertex newPoint = new Vertex(transformation.GetTransformedVector(x, y), strokeColor);
-            Vertex[] points = new Vertex[1];
-            points[0] = newPoint;
-            window.Draw(points, PrimitiveType.Points);
+            if (strokeWeight <= 1)
+            {
+                Vertex newPoint = new Vertex(transformation.GetTransformedVector(x, y), strokeColor);
+                Vertex[] points = new Vertex[1];
+                points[0] = newPoint;
+                window.Draw(points, PrimitiveType.Points);
+            }
+            else
+            {
+                CircleShape circleShape = new CircleShape(strokeWeight*0.5f)
+                {   
+                    FillColor = strokeColor,
+                    OutlineThickness = 0
+                };
+                circleShape.Position = transformation.GetTransformedVector(x, y);
+                window.Draw(circleShape);
+            }
+            
         }
 
         public void DrawCircle(float x, float y, float radius)

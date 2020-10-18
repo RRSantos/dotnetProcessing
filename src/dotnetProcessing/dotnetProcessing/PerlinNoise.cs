@@ -8,7 +8,7 @@ namespace dotnetProcessing
     {
         private const int DEFAULT_SAMPLES = 4096;
         private const int DEFAULT_OCTAVES = 4;
-        private const int DEFAULT_SEED = 102938;
+        private const int DEFAULT_SEED = -1;
         private const double DEFAULT_FALLOFF_FACTOR = 0.5f;
 
         private readonly int octaves;
@@ -25,7 +25,16 @@ namespace dotnetProcessing
 
         private void prepareGrid()
         {
-            Random rand = new Random(seed);
+            Random rand;
+            if (seed == -1)
+            {
+                rand = new Random();
+            }
+            else
+            {
+                rand = new Random(seed);
+            }
+             
             gridDouble = new double[samples];
             for (int i = 0; i < gridDouble.Length; i++)
             {

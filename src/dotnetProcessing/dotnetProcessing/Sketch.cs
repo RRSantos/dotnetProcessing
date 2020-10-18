@@ -18,6 +18,8 @@ namespace dotnetProcessing
 
         private RenderWindow window;
 
+        private Random internalRandom = new Random();
+
         private PerlinNoise perlin = new PerlinNoise();
 
         private string windowTitle;
@@ -112,6 +114,16 @@ namespace dotnetProcessing
             int samples = perlin.GetSamples();
             int seed = perlin.GetSeed();            
             perlin = new PerlinNoise(samples, octaves, seed, falloffFactor);
+        }
+
+        protected float random(float upperLimit)
+        {
+            return (float)internalRandom.NextDouble() * upperLimit;
+        }
+
+        protected float random(float lowerLimit, float upperLimit)
+        {
+            return (float)internalRandom.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
         }
 
 
