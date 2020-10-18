@@ -17,6 +17,9 @@ namespace dotnetProcessing
         private Drawing drawing;
 
         private RenderWindow window;
+
+        private PerlinNoise perlin = new PerlinNoise();
+
         private string windowTitle;
 
         protected bool needsRefresh = false;
@@ -88,6 +91,27 @@ namespace dotnetProcessing
         protected void frameRate(int frameRate)
         {
             window.SetFramerateLimit((uint)frameRate);
+        }
+
+        protected float noise(double x)
+        {
+            return (float)perlin.GetNoiseAt(x);
+        }
+
+        protected void noiseDetail(int octaves)
+        {
+            int samples = perlin.GetSamples();
+            int seed = perlin.GetSeed();
+            double falloffFactor = perlin.GetFalloffFactor();
+            perlin = new PerlinNoise(samples, octaves, seed, falloffFactor);
+            
+        }
+
+        protected void noiseDetail(int octaves, float falloffFactor)
+        {
+            int samples = perlin.GetSamples();
+            int seed = perlin.GetSeed();            
+            perlin = new PerlinNoise(samples, octaves, seed, falloffFactor);
         }
 
 
