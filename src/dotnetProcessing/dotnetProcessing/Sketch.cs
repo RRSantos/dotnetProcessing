@@ -68,6 +68,7 @@ namespace dotnetProcessing
         {
             isMousePressed = false;
             mouseButton = 0;
+            mouseReleased();
         }
 
         private void Window_MouseButtonPressed(object sender, MouseButtonEventArgs e)

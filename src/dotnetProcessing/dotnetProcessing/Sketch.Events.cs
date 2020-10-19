@@ -18,5 +18,11 @@ namespace dotnetProcessing
         {
 
         }
+
+        protected virtual void mouseReleased()
+        {
+
+        }
+        
     }
 }

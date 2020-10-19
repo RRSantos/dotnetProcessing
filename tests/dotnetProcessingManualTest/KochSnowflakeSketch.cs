@@ -52,7 +52,7 @@ namespace dotnetProcessingManualTest
     {
         private List<Segment> segments;
 
-        private UInt64 frame = 0;
+        private ulong frame = 0;
 
         private void addAll(Segment[] arr, List<Segment> list)
         {
