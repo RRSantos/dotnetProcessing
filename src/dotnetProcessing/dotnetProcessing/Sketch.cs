@@ -60,8 +60,34 @@ namespace dotnetProcessing
             window.SetFramerateLimit(60);
             window.Closed += (_, __) => window.Close();
             window.KeyReleased += Window_KeyReleased;
-        }        
-        
+            window.MouseButtonPressed += Window_MouseButtonPressed;
+            window.MouseButtonReleased += Window_MouseButtonReleased;
+        }
+
+        private void Window_MouseButtonReleased(object sender, MouseButtonEventArgs e)
+        {
+            isMousePressed = false;
+            mouseButton = 0;
+        }
+
+        private void Window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
+        {
+            isMousePressed = true;
+            if (e.Button == Mouse.Button.Left)
+            {
+                mouseButton = LEFT;
+            }
+            else if (e.Button == Mouse.Button.Right)
+            {
+                mouseButton = RIGHT;
+            }
+            else
+            {
+                mouseButton = CENTER;
+            }
+            mousePressed();
+        }
+
         protected void size(uint width, uint height)
         {
             this.width = width;

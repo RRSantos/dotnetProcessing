@@ -167,6 +167,18 @@ namespace dotnetProcessing
             DrawRectangle(x, y, sideLength, sideLength);
         }
 
+        public void DrawLine(float x1, float y1, float x2, float y2)
+        {
+            Vertex point1 = new Vertex(transformation.GetTransformedVector(x1, y1), strokeColor);
+            Vertex point2 = new Vertex(transformation.GetTransformedVector(x2, y2), strokeColor);
+            Vertex[] points = new Vertex[2];
+            points[0] = point1;
+            points[1] = point2;
+            window.Draw(points, PrimitiveType.Lines);
+        }
+
+
+
         #endregion
 
         #region Background
