@@ -52,8 +52,6 @@ namespace dotnetProcessingManualTest
     {
         private List<Segment> segments;
 
-        private ulong frame = 0;
-
         private void addAll(Segment[] arr, List<Segment> list)
         {
             foreach (Segment s in arr)
@@ -64,47 +62,32 @@ namespace dotnetProcessingManualTest
         public override void Draw()
         {
             background(0);
-            translate(0, 100);
-
-            if (frame % 30 == 0)
-            {
-                stroke((int)random(256), (int)random(256), (int)random(256), (byte)random(256));
-            }
-            
 
             foreach (Segment s in segments)
             {   
                 line(s.a.X, s.a.Y, s.b.X, s.b.Y);
             }
-            
-            frame++;
         }
 
         protected override void mousePressed()
         {
-            if (isMousePressed && mouseButton == LEFT)
+            List<Segment> nextGeneration = new List<Segment>();
+
+            foreach (Segment s in segments)
             {
-                List<Segment> nextGeneration = new List<Segment>();
-
-                foreach (Segment s in segments)
-                {
-                    Segment[] children = s.Generate();
-                    addAll(children, nextGeneration);
-                }
-                segments = nextGeneration;
-            }
-            else if (isMousePressed && mouseButton == RIGHT)
-            {
-                //stroke(random(256), random(256), random(256), (byte)random(255));
-                
-            }
-
-
+                Segment[] children = s.Generate();
+                addAll(children, nextGeneration);
+            }            
+            segments = nextGeneration;
         }
 
-        public override void Setup()
+        private void setupTriangle()
         {
+
             size(600, 800);
+
+            translate(0, 100);
+            stroke(255);
             segments = new List<Segment>();
             PVector a = new PVector(0, 100);
             PVector b = new PVector(600, 100);
@@ -119,6 +102,36 @@ namespace dotnetProcessingManualTest
             segments.Add(s1);
             segments.Add(s2);
             segments.Add(s3);
+        }
+
+
+        private void setupSomething()
+        {
+            size(800, 800);
+            stroke(0,255,255);
+            int border = 150;
+            segments = new List<Segment>();
+            
+            PVector a = new PVector(border, border);
+            PVector b = new PVector(width- border, border);
+            PVector c = new PVector(width- border, height- border);
+            PVector d = new PVector(border, height- border);
+            Segment s1 = new Segment(a, b);
+            Segment s2 = new Segment(b, c);
+            Segment s3 = new Segment(c, d);
+            Segment s4 = new Segment(d, a);
+
+            
+            segments.Add(s1);
+            segments.Add(s2);
+            segments.Add(s3);
+            segments.Add(s4);
+        }
+
+        public override void Setup()
+        {
+            //setupTriangle();
+            setupSomething();
         }
 
     }
