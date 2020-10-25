@@ -372,5 +372,10 @@ namespace dotnetProcessing
             return target.SetMag(length);
         }
 
+        public float Heading()
+        {
+            return (float)Math.Atan2(Y, X);
+        }
+
     }
 }

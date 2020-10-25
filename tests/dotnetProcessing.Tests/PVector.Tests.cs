@@ -767,6 +767,25 @@ namespace dotnetProcessing.Tests
             Assert.Equal(desiredNewMagnitude, resultMagnitude);
         }
 
+        [Fact]
+        public void ShouldReturnActualAngleOfVectorOnXYPlane()
+        {
+            PVector vectorA = new PVector(1, 1, 2);
+            float theta = vectorA.Heading(); // PI/4
+            float expectedTheta = (float)Math.PI / 4;
+            Assert.Equal(expectedTheta, theta);
+
+            vectorA.Set(1,0);
+            theta = vectorA.Heading(); // 0
+            expectedTheta = 0f;
+            Assert.Equal(expectedTheta, theta);
+
+            vectorA.Set(0, 1);
+            theta = vectorA.Heading(); // PI/2
+            expectedTheta = (float)Math.PI / 2;
+            Assert.Equal(expectedTheta, theta);
+        }
+
 
     }
 }
