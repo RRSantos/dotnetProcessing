@@ -857,6 +857,62 @@ namespace dotnetProcessing.Tests
 
         }
 
+        [Fact]
+        public void ShouldCreateARandom2DUnitVector()
+        {   
+            PVector vectorA = PVector.Random2D();
+            Assert.NotNull(vectorA);
+        }
+
+        [Fact]
+        public void ShouldCreateARandom2DUnitVectorAndSetTarget()
+        {
+            PVector target = new PVector();
+            PVector vectorA = PVector.Random2D(target);
+
+            Assert.Same(target, vectorA);
+            Assert.NotNull(vectorA);
+        }
+
+        [Fact]
+        public void ShouldCreateASameRandom2DUnitVectorFromGivenRandomObject()
+        {
+            Random random = new Random(1);
+            PVector vectorA = PVector.Random2D(random);
+            float angle = vectorA.Heading();
+            float expectedAngle = 1.56243074f;
+
+
+            Assert.NotNull(vectorA);
+            Assert.Equal(expectedAngle, angle);
+
+
+
+            random = new Random(1000);
+            vectorA = PVector.Random2D(random);
+            angle = vectorA.Heading();
+            expectedAngle = 0.9522636f;
+
+
+            Assert.NotNull(vectorA);
+            Assert.Equal(expectedAngle, angle);
+
+        }
+
+        [Fact]
+        public void ShouldCreateASameRandom2DUnitVectorFromGivenRandomObjectAndSetTarget()
+        {
+            Random random = new Random(1);
+            PVector target = new PVector();
+            PVector vectorA = PVector.Random2D(target, random);
+            float angle = vectorA.Heading();
+            float expectedAngle = 1.56243074f;
+
+            Assert.Same(target, vectorA);
+            Assert.NotNull(vectorA);
+            Assert.Equal(expectedAngle, angle);
+        }
+
 
     }
 }

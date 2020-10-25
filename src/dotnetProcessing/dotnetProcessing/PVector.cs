@@ -421,5 +421,48 @@ namespace dotnetProcessing
             return target;
         }
 
+        public static PVector Random2D(PVector target, Random random)
+        {
+            if (random == null)
+            {
+                random = new Random();
+            }
+
+            float randomAngle = (float)(random.NextDouble() * Math.PI * 2);
+
+            if (target == null)
+            {
+                target = FromAngle(randomAngle);
+            }
+            else
+            {
+                PVector vectorFromAngle = FromAngle(randomAngle);
+                target.Set(vectorFromAngle.X, vectorFromAngle.Y);
+            }
+
+            return target;
+
+        }
+
+        public static PVector Random2D()
+        {
+            return Random2D(null, null);
+        }
+
+        public static PVector Random2D(Random random)
+        {
+            return Random2D(null, random);
+        }
+
+        public static PVector Random2D(PVector target)
+        {
+            return Random2D(target, null);
+        }
+
+
+
+
+
+
     }
 }
