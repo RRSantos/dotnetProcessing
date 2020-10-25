@@ -821,7 +821,6 @@ namespace dotnetProcessing.Tests
             Assert.Equal(expectedTheta, actualTheta);
         }
 
-
         [Fact]
         public void ShouldReturnArrayOfActualVectorsComponents()
         {
@@ -830,6 +829,32 @@ namespace dotnetProcessing.Tests
             float[] actualResult = vectorA.Array();
 
             Assert.Equal(expectedResult, actualResult);
+        }
+
+
+        [Fact]
+        public void ShouldCreateUnitVectorFromGivenAngle()
+        {
+            float angle = (float)Math.PI / 2;
+            PVector vectorA = PVector.FromAngle(angle);
+            float calculatedAngle = vectorA.Heading();
+            float calculatedMagnitude = vectorA.Mag();
+
+            Assert.Equal(angle, calculatedAngle);
+            float diff = (float)Math.Abs(1f - calculatedMagnitude);
+            Assert.True(diff < ROUNDING_ERROR);
+
+
+
+            angle = (float)Math.PI / 4;
+            vectorA = PVector.FromAngle(angle);
+            calculatedAngle = vectorA.Heading();
+            calculatedMagnitude = vectorA.Mag();
+
+            Assert.Equal(angle, calculatedAngle);
+            diff = (float)Math.Abs(1f - calculatedMagnitude);
+            Assert.True(diff < ROUNDING_ERROR);
+
         }
 
 

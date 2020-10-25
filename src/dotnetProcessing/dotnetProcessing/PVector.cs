@@ -396,11 +396,29 @@ namespace dotnetProcessing
             return angle;
         }
 
-
         public float[] Array()
         {
             float[] result = new float[3] { X,Y,Z};
             return result;
+        }
+
+        public static PVector FromAngle(float angle)
+        {
+            return FromAngle(angle, null);
+        }
+
+        public static PVector FromAngle(float angle, PVector target)
+        {
+            if (target == null)
+            {
+                target = new PVector();
+            }
+            float x = (float)Math.Cos(angle);
+            float y = (float)Math.Sin(angle);
+
+            target.Set(x, y);
+
+            return target;
         }
 
     }
