@@ -543,6 +543,50 @@ namespace dotnetProcessing.Tests
 
         }
 
+        [Fact]
+        public void ShouldCalculateDotProductWithAnotherVector()
+        {
+            PVector originalVector = new PVector(3, 4, 5);
+
+            PVector anotherVector = new PVector(1, 2, 3);
+
+            float dotProduct = originalVector.Dot(anotherVector);
+
+            Assert.Equal(26f, dotProduct);
+        }
+
+        [Fact]
+        public void ShouldCalculateDotProductWithXYZValues()
+        {
+            PVector originalVector = new PVector(3, 4, 5);
+
+            float dotProduct = originalVector.Dot(1, 2, 3);
+
+            Assert.Equal(26f, dotProduct);
+        }
+
+        [Fact]
+        public void ShouldCalculateDotProductOfTwoVectors()
+        {
+            PVector aVector = new PVector(3, 4, 5);
+            PVector copyOfA = aVector.Copy();
+
+            PVector bVector = new PVector(1, 2, 3);
+            PVector copyOfB = bVector.Copy();
+
+            float dotProduct = PVector.Dot(aVector,bVector);
+            Assert.Equal(26f, dotProduct);
+
+
+            Assert.Equal(copyOfA.X, aVector.X);
+            Assert.Equal(copyOfA.Y, aVector.Y);
+            Assert.Equal(copyOfA.Z, aVector.Z);
+
+            Assert.Equal(copyOfB.X, bVector.X);
+            Assert.Equal(copyOfB.Y, bVector.Y);
+            Assert.Equal(copyOfB.Z, bVector.Z);
+        }
+
 
     }
 }

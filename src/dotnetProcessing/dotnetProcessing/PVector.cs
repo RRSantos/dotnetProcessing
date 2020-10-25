@@ -268,6 +268,21 @@ namespace dotnetProcessing
             return (float)Math.Sqrt(X * X + Y * Y + Z * Z);
         }
 
+        public float Dot(PVector v)
+        {
+            return Dot(v.X, v.Y, v.Z);
+        }
+
+        public float Dot(float x, float y, float z)
+        {
+            return (x * X + y * Y + z * Z);
+        }
+
+        public static float Dot(PVector a, PVector b)
+        {
+            return a.Dot(b);
+        }
+
 
     }
 }
