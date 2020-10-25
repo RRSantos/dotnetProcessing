@@ -509,8 +509,37 @@ namespace dotnetProcessing.Tests
                 "source",
                 () => { PVector resultVector = originalVector.Set(source4); }
             );
+        }
+
+        [Fact]
+        public void ShouldCalculateMagnitudeOfVector()
+        {
+            PVector originalVector = new PVector(3, 4, 0);
+            float magnitude = originalVector.Mag();
+
+            Assert.Equal(5f, magnitude);
 
 
+            originalVector = new PVector(1, 2, 2);
+            magnitude = originalVector.Mag();
+
+            Assert.Equal(3, magnitude);
+
+        }
+
+        [Fact]
+        public void ShouldCalculateMagnitudeSquaredOfVector()
+        {
+            PVector originalVector = new PVector(3, 4, 0);
+            float magnitudeSquared = originalVector.MagSq();
+
+            Assert.Equal(25f, magnitudeSquared);
+
+
+            originalVector = new PVector(1, 2, 2);
+            magnitudeSquared = originalVector.MagSq();
+
+            Assert.Equal(9, magnitudeSquared);
 
         }
 

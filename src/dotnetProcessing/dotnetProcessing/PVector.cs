@@ -255,8 +255,17 @@ namespace dotnetProcessing
         public static float Dist(PVector a, PVector b)
         {
             PVector newVector = a.Copy();
-            return newVector.Dist(b);
-            
+            return newVector.Dist(b);            
+        }
+
+        public float MagSq()
+        {
+            return (X * X + Y * Y + Z * Z);
+        }
+
+        public float Mag()
+        {
+            return (float)Math.Sqrt(X * X + Y * Y + Z * Z);
         }
 
 
