@@ -1003,6 +1003,68 @@ namespace dotnetProcessing.Tests
             
         }
 
+        [Fact]
+        public void ShouldCreateARandom3DUnitVector()
+        {
+            PVector vectorA = PVector.Random3D();
+            Assert.NotNull(vectorA);
+        }
+
+        [Fact]
+        public void ShouldCreateARandom3DUnitVectorAndSetTarget()
+        {
+            PVector target = new PVector();
+            PVector vectorA = PVector.Random3D(target);
+
+            Assert.Same(target, vectorA);
+            Assert.NotNull(vectorA);
+        }
+
+        [Fact]
+        public void ShouldCreateASameRandom3DUnitVectorFromGivenRandomObject()
+        {
+            Random random = new Random(1);
+            PVector vectorA = PVector.Random3D(random);
+            float expectedX = -0.5410597f;
+            float expectedY = -0.83798015f;
+            float expectedZ = -0.07101854f;
+
+            Assert.NotNull(vectorA);
+            Assert.Equal(expectedX, vectorA.X);
+            Assert.Equal(expectedY, vectorA.Y);
+            Assert.Equal(expectedZ, vectorA.Z);
+
+            //Another Seed
+            random = new Random(1234567);
+            vectorA = PVector.Random3D(random);
+            expectedX = 0.6300232f;
+            expectedY = 0.5864165f;
+            expectedZ = -0.5091036f;
+
+            Assert.NotNull(vectorA);
+            Assert.Equal(expectedX, vectorA.X);
+            Assert.Equal(expectedY, vectorA.Y);
+            Assert.Equal(expectedZ, vectorA.Z);
+
+        }
+
+        [Fact]
+        public void ShouldCreateASameRandom3DUnitVectorFromGivenRandomObjectAndSetTarget()
+        {
+            Random random = new Random(1);
+            PVector target = new PVector();
+            PVector vectorA = PVector.Random3D(target, random);
+            float expectedX = -0.5410597f;
+            float expectedY = -0.83798015f;
+            float expectedZ = -0.07101854f;
+
+            Assert.NotNull(vectorA);
+            Assert.Same(target, vectorA);
+            Assert.Equal(expectedX, vectorA.X);
+            Assert.Equal(expectedY, vectorA.Y);
+            Assert.Equal(expectedZ, vectorA.Z);
+        }
+
 
     }
 }

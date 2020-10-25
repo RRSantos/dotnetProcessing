@@ -480,6 +480,44 @@ namespace dotnetProcessing
             
         }
 
+        public static PVector Random3D(PVector target, Random random)
+        {
+            const int maxValue = 1000;
+            if (random == null)
+            {
+                random = new Random();
+            }
+            float randomX = (float)((random.NextDouble() * 2 - 1) * maxValue);
+            float randomY = (float)((random.NextDouble() * 2 - 1) * maxValue);
+            float randomZ = (float)((random.NextDouble() * 2 - 1) * maxValue);
+
+            if (target == null)
+            {
+                target = new PVector(randomX, randomY, randomZ);
+            }
+            else
+            {
+                target.Set(randomX, randomY, randomZ);
+            }
+            target.Normalize();
+            return target;
+        }
+
+        public static PVector Random3D()
+        {
+            return Random3D(null, null);
+        }
+
+        public static PVector Random3D(PVector target)
+        {
+            return Random3D(target, null);
+        }
+
+        public static PVector Random3D(Random random)
+        {
+            return Random3D(null, random);
+        }
+
 
 
 
