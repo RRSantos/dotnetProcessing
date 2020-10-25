@@ -283,6 +283,45 @@ namespace dotnetProcessing
             return a.Dot(b);
         }
 
+        public PVector Cross(PVector v)
+        {
+            return Cross(v,null);
+        }
+
+        public PVector Cross(PVector v, PVector target)
+        {
+            float xCrossComponent = Y * v.Z - Z * v.Y;
+            float yCrossComponent = Z * v.X - X * v.Z;
+            float zCrossComponent = X * v.Y - Y * v.X;
+
+            if (target == null)
+            {
+                target = new PVector(xCrossComponent, yCrossComponent, zCrossComponent);
+            }
+            else
+            {
+                target.Set(xCrossComponent, yCrossComponent, zCrossComponent);
+            }
+
+            return target;
+        }
+
+        public static PVector Cross(PVector v1, PVector v2, PVector target)
+        {
+            PVector crossProduct = v1.Cross(v2);
+
+            if (target == null)
+            {
+                target = crossProduct;
+            }
+            else
+            {
+                target.Set(crossProduct.X, crossProduct.Y, crossProduct.Z);
+            }
+
+            return target;
+        }
+
 
     }
 }

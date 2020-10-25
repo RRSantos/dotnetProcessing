@@ -588,5 +588,60 @@ namespace dotnetProcessing.Tests
         }
 
 
+        [Fact]
+        public void ShouldCalculateCrossProductOfTwoVectors()
+        {
+            PVector aVector = new PVector(3, 4, 5);
+            PVector bVector = new PVector(1, 2, 3);
+            PVector expectedResult = new PVector(2, -4, 2);
+
+            PVector crossProductVector = aVector.Cross(bVector);
+
+            Assert.Equal(expectedResult.X, crossProductVector.X);
+            Assert.Equal(expectedResult.Y, crossProductVector.Y);
+            Assert.Equal(expectedResult.Z, crossProductVector.Z);
+        }
+
+        [Fact]
+        public void ShouldCalculateCrossProductOfTwoVectorsAndSetTargetVector()
+        {
+            PVector aVector = new PVector(3, 4, 5);
+            PVector bVector = new PVector(1, 2, 3);
+            PVector targetVector = new PVector(6, 7, 8);
+            PVector expectedResult = new PVector(2, -4, 2);
+
+            PVector crossProductVector = aVector.Cross(bVector, targetVector);
+            Assert.NotSame(targetVector, expectedResult);
+
+            Assert.Equal(expectedResult.X, targetVector.X);
+            Assert.Equal(expectedResult.Y, targetVector.Y);
+            Assert.Equal(expectedResult.Z, targetVector.Z);
+
+            Assert.Equal(expectedResult.X, crossProductVector.X);
+            Assert.Equal(expectedResult.Y, crossProductVector.Y);
+            Assert.Equal(expectedResult.Z, crossProductVector.Z);
+        }
+
+        [Fact]
+        public void ShouldStaticallyCalculateCrossProductOfTwoVectorsAndSetTargetVector()
+        {
+            PVector aVector = new PVector(3, 4, 5);
+            PVector bVector = new PVector(1, 2, 3);
+            PVector targetVector = new PVector(6, 7, 8);
+            PVector expectedResult = new PVector(2, -4, 2);
+
+            PVector crossProductVector = PVector.Cross(aVector, bVector, targetVector);
+            Assert.NotSame(targetVector, expectedResult);
+
+            Assert.Equal(expectedResult.X, targetVector.X);
+            Assert.Equal(expectedResult.Y, targetVector.Y);
+            Assert.Equal(expectedResult.Z, targetVector.Z);
+
+            Assert.Equal(expectedResult.X, crossProductVector.X);
+            Assert.Equal(expectedResult.Y, crossProductVector.Y);
+            Assert.Equal(expectedResult.Z, crossProductVector.Z);
+        }
+
+
     }
 }
