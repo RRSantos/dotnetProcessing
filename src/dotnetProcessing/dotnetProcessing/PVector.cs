@@ -322,6 +322,30 @@ namespace dotnetProcessing
             return target;
         }
 
+        public PVector Normalize()
+        {
+            float magnitude = Mag();
+
+            if (magnitude!= 0 && magnitude != 1)
+            {
+                Div(magnitude);
+            }
+
+            return this;
+        }
+
+        public PVector Normalize(PVector target)
+        {
+            if (target == null)
+            {
+                target = Copy();
+            }
+
+            target.Normalize();
+
+            return target;
+        }
+
 
     }
 }

@@ -642,6 +642,40 @@ namespace dotnetProcessing.Tests
             Assert.Equal(expectedResult.Z, crossProductVector.Z);
         }
 
+        [Fact]
+        public void ShouldNormalizeVector()
+        {
+            PVector aVector = new PVector(3, 4, 5);
+            float originalMagnitude = aVector.Mag();
+
+            PVector normalizedVector = aVector.Normalize();
+
+            Assert.Same(normalizedVector, aVector);
+            Assert.NotEqual(originalMagnitude, aVector.Mag());
+            Assert.Equal(1f, aVector.Mag());
+
+        }
+
+        [Fact]
+        public void ShouldReturnNormalizedVectorWithoutChangingActrualVector()
+        {
+            PVector vectorA = new PVector(3, 4, 5);
+            PVector vectorACopy = vectorA.Copy();
+            float originalMagnitude = vectorA.Mag();
+            PVector targetVector = new PVector(5, 5, 5);
+
+            PVector normalizedVector = vectorA.Normalize(targetVector);
+
+            //Vector A should not change
+            Assert.Equal(originalMagnitude, vectorA.Mag());
+            Assert.Equal(vectorACopy.X, vectorA.X);
+            Assert.Equal(vectorACopy.Y, vectorA.Y);
+            Assert.Equal(vectorACopy.Z, vectorA.Z);
+
+            Assert.Same(normalizedVector, targetVector);            
+            Assert.NotEqual(1f, targetVector.Mag());
+        }
+
 
     }
 }
