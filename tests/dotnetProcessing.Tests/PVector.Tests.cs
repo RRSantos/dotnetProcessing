@@ -914,5 +914,95 @@ namespace dotnetProcessing.Tests
         }
 
 
+        [Fact]
+        public void ShouldLinearInterpoleFromGivenVectorAndAmmout()
+        {
+            PVector vectorA = new PVector(1, 2, 3);
+            PVector vectorB = new PVector(5, 6, 7);
+            float ammount = 0.5f;
+            PVector resultVector = vectorA.Lerp(vectorB, ammount);
+
+            Assert.Same(resultVector, vectorA);
+            Assert.NotNull(resultVector);
+
+            Assert.Equal(3f, resultVector.X);
+            Assert.Equal(4f, resultVector.Y);
+            Assert.Equal(5f, resultVector.Z);
+
+
+            vectorA = new PVector(1, 2, 3);
+            vectorB = new PVector(4, 5, 6);
+            ammount = 1f/3f;
+            resultVector = vectorA.Lerp(vectorB, ammount);
+
+            Assert.NotNull(resultVector);
+            Assert.Same(resultVector, vectorA);
+
+            Assert.Equal(2f, resultVector.X);
+            Assert.Equal(3f, resultVector.Y);
+            Assert.Equal(4f, resultVector.Z);
+        }
+
+        [Fact]
+        public void ShouldLinearInterpoleFromXYZAndAmmountParams()
+        {
+            PVector vectorA = new PVector(1, 2, 3);
+            
+            float ammount = 0.5f;
+            PVector resultVector = vectorA.Lerp(5, 6, 7, ammount);
+
+            Assert.Same(resultVector, vectorA);
+            Assert.NotNull(resultVector);
+
+            Assert.Equal(3f, resultVector.X);
+            Assert.Equal(4f, resultVector.Y);
+            Assert.Equal(5f, resultVector.Z);
+
+
+            vectorA = new PVector(1, 2, 3);
+            ammount = 1f / 3f;
+            resultVector = vectorA.Lerp(4, 5, 6, ammount);
+
+            Assert.NotNull(resultVector);
+            Assert.Same(resultVector, vectorA);
+
+            Assert.Equal(2f, resultVector.X);
+            Assert.Equal(3f, resultVector.Y);
+            Assert.Equal(4f, resultVector.Z);
+        }
+
+        [Fact]
+        public void ShouldStaticallyLinearInterpoleTwoVectorsByGivenAmmountAndDontChangeOriginalVectors()
+        {
+            PVector vectorA = new PVector(1, 2, 3);
+            PVector vectorACopy = vectorA.Copy();
+
+
+            PVector vectorB = new PVector(5, 6, 7);
+            PVector vectorBCopy = vectorB.Copy();
+
+            float ammount = 0.5f;
+            PVector resultVector = PVector.Lerp(vectorA, vectorB, ammount);
+
+            // vectorA should not be changed
+            Assert.Equal(vectorACopy.X, vectorA.X);
+            Assert.Equal(vectorACopy.Y, vectorA.Y);
+            Assert.Equal(vectorACopy.Z, vectorA.Z);
+
+            // vectorB should not be changed
+            Assert.Equal(vectorBCopy.X, vectorB.X);
+            Assert.Equal(vectorBCopy.Y, vectorB.Y);
+            Assert.Equal(vectorBCopy.Z, vectorB.Z);
+
+
+            Assert.NotNull(resultVector);
+
+            Assert.Equal(3f, resultVector.X);
+            Assert.Equal(4f, resultVector.Y);
+            Assert.Equal(5f, resultVector.Z);
+            
+        }
+
+
     }
 }

@@ -460,6 +460,27 @@ namespace dotnetProcessing
         }
 
 
+        public PVector Lerp(PVector v, float ammount)
+        {
+            return Lerp(v.X, v.Y, v.Z, ammount);
+        }
+
+        public PVector Lerp(float x, float y, float z, float ammount)
+        {
+            X = Helpers.Utils.Lerp(X, x, ammount);
+            Y = Helpers.Utils.Lerp(Y, y, ammount);
+            Z = Helpers.Utils.Lerp(Z, z, ammount);
+            return this;
+        }
+
+        public static PVector Lerp(PVector v1, PVector v2, float ammount)
+        {
+            PVector resultVector = v1.Copy();
+            return resultVector.Lerp(v2, ammount);
+            
+        }
+
+
 
 
 
