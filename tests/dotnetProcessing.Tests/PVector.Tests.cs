@@ -740,6 +740,33 @@ namespace dotnetProcessing.Tests
 
         }
 
+        [Fact]
+        public void ShouldSetMagnitudeOfTargetVectorWithoutChangingActualVector()
+        {
+            PVector vectorA = new PVector(1, 2, 2); 
+            float originalVectorAMagnitude = vectorA.Mag(); // Magnitude 3
+            PVector vectorACopy = vectorA.Copy();
+
+            PVector targetVector = new PVector(3, 4, 0); 
+            float originalTargetVectorMagnitude = targetVector.Mag(); // Magnitude 5
+
+            float desiredNewMagnitude = 8f;
+
+            PVector resultVector = vectorA.SetMag(targetVector, desiredNewMagnitude);
+            float resultMagnitude = resultVector.Mag();
+
+            //Vector A should not change
+            Assert.Equal(originalVectorAMagnitude, vectorA.Mag());
+            Assert.Equal(vectorACopy.X, vectorA.X);
+            Assert.Equal(vectorACopy.Y, vectorA.Y);
+            Assert.Equal(vectorACopy.Z, vectorA.Z);
+
+
+            Assert.Same(targetVector, resultVector);            
+            Assert.NotEqual(originalTargetVectorMagnitude, resultMagnitude);
+            Assert.Equal(desiredNewMagnitude, resultMagnitude);
+        }
+
 
     }
 }

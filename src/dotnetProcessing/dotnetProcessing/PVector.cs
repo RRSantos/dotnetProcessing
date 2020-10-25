@@ -367,5 +367,10 @@ namespace dotnetProcessing
             return this;
         }
 
+        public PVector SetMag(PVector target, float length)
+        {
+            return target.SetMag(length);
+        }
+
     }
 }
