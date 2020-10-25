@@ -346,6 +346,16 @@ namespace dotnetProcessing
             return target;
         }
 
+        public PVector Limit(float max)
+        {
+            if (MagSq() > max*max)
+            {
+                Normalize();
+                Mult(max);
+            }
+
+            return this;
+        }
 
     }
 }

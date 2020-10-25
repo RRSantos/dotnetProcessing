@@ -676,6 +676,35 @@ namespace dotnetProcessing.Tests
             Assert.NotEqual(1f, targetVector.Mag());
         }
 
+        [Fact]
+        public void ShouldChangeMagnitudeIfActualMagnitudeIsGreaterThanMaxValue()
+        {
+            PVector vectorA = new PVector(1, 2, 2); // Magnitude 3
+            float originalMagnitude = vectorA.Mag();
+            float maxMagnitude = 2f;
+            PVector limitedVector = vectorA.Limit(maxMagnitude);
+            float newMagnitude = limitedVector.Mag();
+
+            Assert.Same(vectorA, limitedVector);
+            Assert.Equal(3f, originalMagnitude);
+            Assert.NotEqual(newMagnitude, originalMagnitude);
+            Assert.Equal(maxMagnitude, newMagnitude);
+        }
+
+        [Fact]
+        public void ShouldNotChangeMagnitudeIfActualMagnitudeIsLowerThanMaxValue()
+        {
+            PVector vectorA = new PVector(1, 2, 2); // Magnitude 3
+            float originalMagnitude = vectorA.Mag();
+            float maxMagnitude = 5f;
+            PVector limitedVector = vectorA.Limit(maxMagnitude);
+            float newMagnitude = limitedVector.Mag();
+
+            Assert.Same(vectorA, limitedVector);
+            Assert.Equal(3f, originalMagnitude);
+            Assert.Equal(originalMagnitude, newMagnitude);
+        }
+
 
     }
 }
