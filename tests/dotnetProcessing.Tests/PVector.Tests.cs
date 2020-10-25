@@ -705,6 +705,41 @@ namespace dotnetProcessing.Tests
             Assert.Equal(originalMagnitude, newMagnitude);
         }
 
+        [Fact]
+        public void ShouldSetMagnitude()
+        {
+            PVector vectorA = new PVector(1, 2, 2); // Magnitude 3
+            float originalMagnitude = vectorA.Mag();
+            float desiredNewMagnitude = 5f;
+            PVector limitedVector = vectorA.SetMag(desiredNewMagnitude);
+            float newMagnitude = limitedVector.Mag();
+
+            Assert.Same(vectorA, limitedVector);
+            Assert.Equal(3f, originalMagnitude);
+            Assert.NotEqual(originalMagnitude, newMagnitude);
+            double roundingError = Math.Abs(desiredNewMagnitude - newMagnitude);
+            Assert.True(roundingError < ROUNDING_ERROR);
+        }
+
+        [Fact]
+        public void ShouldThowExceptionIfNewMagnitudeIsZeroOrLower()
+        {
+            PVector vectorA = new PVector(1, 2, 2); // Magnitude 3
+            float originalMagnitude = vectorA.Mag();
+
+            Assert.Throws<ArgumentException>(
+                "length",
+                () => { PVector limitedVector = vectorA.SetMag(-0.001f); }
+            );
+
+
+            Assert.Throws<ArgumentException>(
+                "length", 
+                () => { PVector limitedVector = vectorA.SetMag(0f); }
+            );
+
+        }
+
 
     }
 }

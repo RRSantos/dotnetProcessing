@@ -350,10 +350,20 @@ namespace dotnetProcessing
         {
             if (MagSq() > max*max)
             {
-                Normalize();
-                Mult(max);
+                return SetMag(max);
             }
 
+            return this;
+        }
+
+        public PVector SetMag(float length)
+        {
+            if (length <= 0f)
+            {
+                throw new ArgumentException("New magnitude should be greater than zero.", "length");
+            }
+            Normalize();
+            Mult(length);
             return this;
         }
 
