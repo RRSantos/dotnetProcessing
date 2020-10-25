@@ -26,6 +26,47 @@ namespace dotnetProcessing
         {
         }
 
+        public PVector Set(float x, float y, float z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+
+            return this;
+        }
+
+        public PVector Set(float x, float y)
+        {
+            return Set(x, y, Z);            
+        }
+
+        public PVector Set(PVector v)
+        {
+            return Set(v.X, v.Y, v.Z);
+        }
+
+        public PVector Set(IList<float> source)
+        {
+            if (source.Count < 1 || source.Count > 3)
+            {
+                throw new ArgumentException("The size of 'source' must be between 1 and 3", "source");
+            }
+            if (source.Count > 0)
+            {
+                X = source[0];                
+            }
+            if (source.Count > 1)
+            {
+                Y = source[1];
+            }
+            if (source.Count > 2)
+            {
+                Z = source[2];
+            }
+
+            return this;
+        }
+
         public PVector Copy()
         {
             return new PVector(X, Y, Z);
@@ -217,5 +258,7 @@ namespace dotnetProcessing
             return newVector.Dist(b);
             
         }
+
+
     }
 }

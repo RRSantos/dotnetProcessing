@@ -413,6 +413,107 @@ namespace dotnetProcessing.Tests
             Assert.Equal((float)Math.Sqrt(2), distance);
         }
 
+        [Fact]
+        public void ShouldSetComponentsFromTwoFloatParamsAndReturnVector()
+        {
+            PVector originalVector = new PVector(1, 2, 3);
+
+            PVector resultVector = originalVector.Set(4, 5);
+
+            Assert.Equal(originalVector, resultVector);
+
+            Assert.Equal(4, originalVector.X);
+            Assert.Equal(5, originalVector.Y);
+            Assert.Equal(3, originalVector.Z);
+        }
+
+        [Fact]
+        public void ShouldSetComponentsFromThreeFloatParamsAndReturnVector()
+        {
+            PVector originalVector = new PVector(1, 2, 3);
+
+            PVector resultVector = originalVector.Set(4, 5, 6);
+
+            Assert.Equal(originalVector, resultVector);
+
+            Assert.Equal(4, originalVector.X);
+            Assert.Equal(5, originalVector.Y);
+            Assert.Equal(6, originalVector.Z);
+        }
+
+        [Fact]
+        public void ShouldSetComponentsFromAnotherVectorParamAndReturnVector()
+        {
+            PVector originalVector = new PVector(1, 2, 3);
+            PVector paramVector = new PVector(4, 5, 6);
+
+            PVector resultVector = originalVector.Set(paramVector);
+
+            Assert.Equal(originalVector, resultVector);
+
+            Assert.Equal(4, originalVector.X);
+            Assert.Equal(5, originalVector.Y);
+            Assert.Equal(6, originalVector.Z);
+        }
+
+        [Fact]
+        public void ShouldSetComponentsFromIListParamOfSize1To3AndReturnVector()
+        {
+            PVector originalVector = new PVector(1, 2, 3);
+            float[] source1 = { 4f };
+
+            PVector resultVector = originalVector.Set(source1);
+
+            Assert.Equal(originalVector, resultVector);
+
+            Assert.Equal(4, originalVector.X);
+            Assert.Equal(2, originalVector.Y);
+            Assert.Equal(3, originalVector.Z);
+
+
+            float[] source2 = { 4f,5f };
+
+            resultVector = originalVector.Set(source2);
+
+            Assert.Equal(originalVector, resultVector);
+
+            Assert.Equal(4, originalVector.X);
+            Assert.Equal(5, originalVector.Y);
+            Assert.Equal(3, originalVector.Z);
+
+            float[] source3 = { 4f, 5f, 6f };
+
+            resultVector = originalVector.Set(source3);
+
+            Assert.Equal(originalVector, resultVector);
+
+            Assert.Equal(4, originalVector.X);
+            Assert.Equal(5, originalVector.Y);
+            Assert.Equal(6, originalVector.Z);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionIfIListSizeWereZeroOrHigherThenThree()
+        {
+            PVector originalVector = new PVector(1, 2, 3);
+            float[] source1 = { };
+
+            Assert.Throws<ArgumentException>(
+                "source", 
+                () => { PVector resultVector = originalVector.Set(source1); }
+            );
+
+            float[] source4 = {1,2,3,4 };
+
+            Assert.Throws<ArgumentException>(
+                "source",
+                () => { PVector resultVector = originalVector.Set(source4); }
+            );
+
+
+
+        }
+
 
     }
 }
