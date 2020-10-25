@@ -787,5 +787,40 @@ namespace dotnetProcessing.Tests
         }
 
 
+        [Fact]
+        public void ShouldReturnAngleBetweenVectorsOnXYPlane()
+        {
+            PVector vectorA = new PVector(1, 0);
+            PVector vectorB = new PVector(0, 1);
+
+            float expectedTheta = (float)Math.PI / 2;
+            float actualTheta = vectorA.AngleBetween(vectorB);
+            Assert.Equal(expectedTheta, actualTheta);
+
+
+            vectorA = new PVector(2, 7);
+            vectorB = new PVector(1, -4);
+
+            float expectedThetaInDegrees = 150.01836f;
+            float actualThetaInDegrees = Helpers.ConvertionHelper.RadiansToDegrees(vectorA.AngleBetween(vectorB));
+            Assert.Equal(expectedThetaInDegrees, actualThetaInDegrees);
+        }
+
+        [Fact]
+        public void ShouldReturnZeroIfOneVectorHasAllComponentsEqualsZero()
+        {
+            PVector vectorA = new PVector(0, 0, 0);
+            PVector vectorB = new PVector(1, 1, 1);
+            float expectedTheta = 0f;
+
+            float actualTheta = vectorA.AngleBetween(vectorB);
+            
+            
+            Assert.Equal(expectedTheta, actualTheta);
+            actualTheta = vectorB.AngleBetween(vectorA);
+            Assert.Equal(expectedTheta, actualTheta);
+        }
+
+
     }
 }

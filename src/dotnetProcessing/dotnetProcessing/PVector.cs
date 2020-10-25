@@ -7,6 +7,10 @@ namespace dotnetProcessing
 {
     public class PVector
     {
+        private bool isAllComponentsZero(PVector testVector)
+        {
+            return (testVector.X == 0 && testVector.Y == 0 && testVector.Z == 0);
+        }
         public float X { get; protected set; }
         public float Y { get; protected set; }
         public float Z { get; protected set; }
@@ -375,6 +379,23 @@ namespace dotnetProcessing
         public float Heading()
         {
             return (float)Math.Atan2(Y, X);
+        }
+
+
+        public float AngleBetween(PVector v)
+        {
+            if (isAllComponentsZero(this) || isAllComponentsZero(v))
+                return 0.0f;
+
+            float dotProduct = Dot(v);
+            float thisMagnitude = Mag();
+            float vMagnitude  = v.Mag();
+            float cosAngle = dotProduct / (thisMagnitude * vMagnitude);
+            float angle = (float)Math.Acos(cosAngle);
+
+            return angle;
+
+            
         }
 
     }
