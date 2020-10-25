@@ -394,8 +394,13 @@ namespace dotnetProcessing
             float angle = (float)Math.Acos(cosAngle);
 
             return angle;
+        }
 
-            
+
+        public float[] Array()
+        {
+            float[] result = new float[3] { X,Y,Z};
+            return result;
         }
 
     }

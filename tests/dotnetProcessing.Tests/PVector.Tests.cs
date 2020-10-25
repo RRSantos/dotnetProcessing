@@ -822,5 +822,16 @@ namespace dotnetProcessing.Tests
         }
 
 
+        [Fact]
+        public void ShouldReturnArrayOfActualVectorsComponents()
+        {
+            PVector vectorA = new PVector(1.1f, 2.2f, 3.3f);
+            float[] expectedResult = new float[3] { 1.1f, 2.2f, 3.3f };
+            float[] actualResult = vectorA.Array();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+
     }
 }
