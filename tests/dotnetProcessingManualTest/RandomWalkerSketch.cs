@@ -10,6 +10,7 @@ namespace dotnetProcessingManualTest
 
         private void drawRandomWalker()
         {
+            translate(width / 2, height / 2);
             stroke(255, 100);
             strokeWeight(internal_radius);
             

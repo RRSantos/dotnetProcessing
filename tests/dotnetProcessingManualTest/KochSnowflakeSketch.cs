@@ -60,8 +60,8 @@ namespace dotnetProcessingManualTest
             }
         }
         public override void Draw()
-        {
-            background(0);
+        {            
+            background(0);         
 
             foreach (Segment s in segments)
             {   

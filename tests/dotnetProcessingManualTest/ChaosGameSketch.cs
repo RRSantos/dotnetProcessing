@@ -70,6 +70,7 @@ namespace dotnetProcessingManualTest
 
         private void drawChaosGameSquare()
         {
+            translate(width / 2, height / 2);
             int lastIndex = random.Next(points.Count);
             for (int i = 0; i < 500; i++)
             {
@@ -100,6 +101,7 @@ namespace dotnetProcessingManualTest
 
         private void drawPoligonoRegular()
         {
+            translate(width / 2, height / 2);
             for (int i = 0; i < 500; i++)
             {
                 int nextIndex = random.Next(points.Count);

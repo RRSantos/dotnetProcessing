@@ -76,7 +76,8 @@ namespace dotnetProcessingManualTest
         public override void Draw()
         {
             background(0);
-            
+            translate(width / 2, height / 2);
+
             for (int i = 0; i < samples; i++)
             {
                 Orbit moon = sun;
