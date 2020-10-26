@@ -7,7 +7,7 @@ namespace dotnetProcessingManualTest
     {
         static void Main(string[] args)
         {
-            Sketch sketch = new KochSnowflakeSketch();
+            Sketch sketch = new FractalTreesSketch();
             sketch.Run();
         }
     }

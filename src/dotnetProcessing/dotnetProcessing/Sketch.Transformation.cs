@@ -1,22 +1,39 @@
 ﻿using SFML.System;
+using System.Collections.Generic;
 
 namespace dotnetProcessing
 {
     partial class Sketch
     {
+        private readonly Stack<Transformation> transformationStack = new Stack<Transformation>();
+        private Transformation transformation = new Transformation();
+
+
         protected void translate(float x, float y, float z)
-        {
-            transformation.Origin = new Vector3f(x, y, z);
+        {   
+            transformation.Translate(x, y, z);
         }
 
         protected void translate(float x, float y)
         {
-            transformation.Origin = new Vector3f(x, y, transformation.Origin.Z);
+            translate(x, y, 0);
         }
 
         protected void rotate(float angleInRadians)
         {
-            transformation.Angle = angleInRadians;
+            float newAngle = transformation.Angle + angleInRadians;
+            transformation.SetAngle(newAngle);            
+        }
+
+        protected void push()
+        {   
+            transformationStack.Push(transformation.Copy());
+        }
+
+        protected void pop()
+        {
+            transformation = transformationStack.Pop();
+            drawing.SetTransformation(transformation);
         }
     }
 }

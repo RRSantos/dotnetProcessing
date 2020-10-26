@@ -241,7 +241,8 @@ namespace dotnetProcessing
 
         public PVector Rotate(float theta)
         {
-            Transformation transform = new Transformation() {Angle = theta};
+            Transformation transform = new Transformation();
+            transform.SetAngle(theta);
             var rotated = transform.GetTransformedVector(X, Y);
             X = rotated.X;
             Y = rotated.Y;

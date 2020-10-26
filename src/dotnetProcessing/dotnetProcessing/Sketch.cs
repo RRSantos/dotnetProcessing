@@ -13,7 +13,7 @@ namespace dotnetProcessing
         private const int DEFAULT_HEIGHT = 480;
         private const string DEFAULT_TITLE = "dotnet Processing";
 
-        private readonly Transformation transformation;
+        
         private Drawing drawing;
 
         private RenderWindow window;
@@ -157,8 +157,7 @@ namespace dotnetProcessing
         public Sketch()
         {
             width = DEFAULT_WIDTH;
-            height = DEFAULT_HEIGHT;
-            transformation = new Transformation();
+            height = DEFAULT_HEIGHT;            
             initializeInternalFields();
             windowTitle = DEFAULT_TITLE;
         }
@@ -171,11 +170,12 @@ namespace dotnetProcessing
             {
                 window.DispatchEvents();
                 Draw();
-                
+
                 if (needsRefresh)
                 {   
                     window.Display();
                     needsRefresh = false;
+                    transformation.Clear();
                 }
             }
             

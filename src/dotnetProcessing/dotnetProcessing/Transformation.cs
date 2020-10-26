@@ -5,20 +5,58 @@ namespace dotnetProcessing
 {
     class Transformation
     {
-        public float Angle { get; set; }
-        public Vector3f Origin { get; set; }
+        public float Angle { get; protected set; }
+        
+        protected PVector origin;
+
+        private PVector getRotatedVector(PVector vector)
+        {
+            float newX = (float)(vector.X * Math.Cos(Angle) - vector.Y * Math.Sin(Angle));
+            float newY = (float)(vector.X * Math.Sin(Angle) + vector.Y * Math.Cos(Angle));
+
+            return new PVector(newX, newY);
+        }
+
+        public void SetAngle(float newAngle)
+        {
+            Angle = newAngle;            
+        }
 
         public Transformation()
         {
-            Origin = new Vector3f(0, 0, 0);
+            origin = new PVector(0, 0, 0);
             Angle = 0;
         }
         public Vector2f GetTransformedVector(float x , float y)
         {
-            double newX = Origin.X + x * Math.Cos(Angle) - y * Math.Sin(Angle);
-            double newY = Origin.Y + x * Math.Sin(Angle) + y * Math.Cos(Angle);
+            PVector originalVector = new PVector(x, y);
+            PVector rotatedVector = getRotatedVector(originalVector);           
 
-            return new Vector2f((float)newX, (float)newY);
+            rotatedVector.Add(origin);
+
+            return new Vector2f(rotatedVector.X, rotatedVector.Y);
+        }
+
+        public void Clear()
+        {
+            origin.Set(0, 0, 0);
+            Angle = 0;
+        }
+
+        public void Translate(float x, float y, float z)
+        {
+            PVector originalVector = new PVector(x, y, z);
+            PVector rotatedVector = getRotatedVector(originalVector);
+            origin.Add(rotatedVector);
+        }
+
+        public Transformation Copy()
+        {
+            Transformation transformationCopy = new Transformation();
+            transformationCopy.Angle = Angle;
+            transformationCopy.origin = origin.Copy();
+            return transformationCopy;
+
         }
     }
 }

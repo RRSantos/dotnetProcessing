@@ -13,7 +13,7 @@ namespace dotnetProcessing
         private const float DEFAULT_STROKE_WEIGHT = 1f;
 
         private readonly RenderWindow window;
-        private readonly Transformation transformation;
+        private Transformation transformation;
 
         private readonly VertexArray shapePoints = new VertexArray(PrimitiveType.LineStrip);
 
@@ -223,6 +223,11 @@ namespace dotnetProcessing
         {
             window.Draw(shapePoints);
             ClearShape();
+        }
+
+        public void SetTransformation(Transformation newTransformation)
+        {
+            transformation = newTransformation; 
         }
 
     }
