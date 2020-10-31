@@ -165,6 +165,11 @@ namespace dotnetProcessing
             shouldDraw = true;
         }
 
+        protected void redraw()
+        {
+            needsRefresh = true;
+        }
+
 
         public Sketch()
         {
@@ -187,7 +192,7 @@ namespace dotnetProcessing
                 }                
 
                 if (needsRefresh)
-                {
+                {   
                     window.Display();
                     needsRefresh = false;
                     transformation.Clear();

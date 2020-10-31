@@ -100,7 +100,7 @@ namespace dotnetProcessingManualTest
         public override void Draw()
         {
             drawActualRule();
-            noLoop();
+            noLoop();            
         }
 
         protected override void mousePressed()
@@ -114,8 +114,6 @@ namespace dotnetProcessingManualTest
                 ruleNumber--;
             }
             loop();
-            
-            
         }
 
         public override void Setup()
