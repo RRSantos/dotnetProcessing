@@ -1,5 +1,4 @@
-﻿using SFML.System;
-using System;
+﻿using System;
 
 namespace dotnetProcessing
 {
@@ -27,14 +26,14 @@ namespace dotnetProcessing
             origin = new PVector(0, 0, 0);
             Angle = 0;
         }
-        public Vector2f GetTransformedVector(float x , float y)
+        public PVector GetTransformedVector(float x , float y)
         {
             PVector originalVector = new PVector(x, y);
             PVector rotatedVector = getRotatedVector(originalVector);           
 
             rotatedVector.Add(origin);
 
-            return new Vector2f(rotatedVector.X, rotatedVector.Y);
+            return rotatedVector;
         }
 
         public void Clear()

@@ -109,10 +109,16 @@ namespace dotnetProcessing
             return circleShape;
         }
 
+        private Vector2f convertToVector2f(PVector pvector)
+        {
+            return new Vector2f(pvector.X, pvector.Y);
+        }
+
         public void DrawEllipse(float x, float y, float width, float height)
         {
             CircleShape circle = createCircleShape(x, y, width);
-            circle.Position = transformation.GetTransformedVector(x - width, y - height);
+            PVector transformedVector = transformation.GetTransformedVector(x - width, y - height);
+            circle.Position = convertToVector2f(transformedVector) ;
             circle.Scale = new Vector2f(1, height / width);
             window.Draw(circle);
         }
@@ -121,7 +127,10 @@ namespace dotnetProcessing
         {
             if (strokeWeight <= 1)
             {
-                Vertex newPoint = new Vertex(transformation.GetTransformedVector(x, y), strokeColor);
+                PVector transformedVector = transformation.GetTransformedVector(x, y);
+                Vector2f position = convertToVector2f(transformedVector);
+
+                Vertex newPoint = new Vertex(position, strokeColor);
                 Vertex[] points = new Vertex[1];
                 points[0] = newPoint;
                 window.Draw(points, PrimitiveType.Points);
@@ -133,7 +142,8 @@ namespace dotnetProcessing
                     FillColor = strokeColor,
                     OutlineThickness = 0
                 };
-                circleShape.Position = transformation.GetTransformedVector(x, y);
+                PVector transformedVector = transformation.GetTransformedVector(x, y);
+                circleShape.Position = convertToVector2f(transformedVector);
                 window.Draw(circleShape);
             }
             
@@ -143,15 +153,17 @@ namespace dotnetProcessing
         {
 
             CircleShape circle = createCircleShape(x, y, radius);
-            circle.Position = transformation.GetTransformedVector(x - radius, y - radius);
+            PVector transformedPosition = transformation.GetTransformedVector(x - radius, y - radius);
+            circle.Position = convertToVector2f(transformedPosition);
             window.Draw(circle);
         }
 
         public void DrawRectangle(float x, float y, float width, float heigth)
         {
+            PVector transformedPosition = transformation.GetTransformedVector(x, y);
             RectangleShape rectangle = new RectangleShape(new Vector2f(width, heigth))
             {
-                Position = transformation.GetTransformedVector(x, y),
+                Position = convertToVector2f(transformedPosition),
                 FillColor = fillColor,
                 OutlineThickness = strokeWeight,
                 OutlineColor = strokeColor,
@@ -169,15 +181,15 @@ namespace dotnetProcessing
 
         public void DrawLine(float x1, float y1, float x2, float y2)
         {
-            Vertex point1 = new Vertex(transformation.GetTransformedVector(x1, y1), strokeColor);
-            Vertex point2 = new Vertex(transformation.GetTransformedVector(x2, y2), strokeColor);
+            PVector transformedPosition1 = transformation.GetTransformedVector(x1, y1);
+            PVector transformedPosition2 = transformation.GetTransformedVector(x2, y2);
+            Vertex point1 = new Vertex(convertToVector2f(transformedPosition1), strokeColor);
+            Vertex point2 = new Vertex(convertToVector2f(transformedPosition2), strokeColor);
             Vertex[] points = new Vertex[2];
             points[0] = point1;
             points[1] = point2;
             window.Draw(points, PrimitiveType.Lines);
         }
-
-
 
         #endregion
 
@@ -215,7 +227,8 @@ namespace dotnetProcessing
 
         public void AddShapePoint(float x, float y )
         {
-            Vector2f shapePoint = transformation.GetTransformedVector(x, y);
+            PVector transformedPosition1 = transformation.GetTransformedVector(x, y);
+            Vector2f shapePoint = convertToVector2f(transformedPosition1);
             shapePoints.Append(new Vertex(shapePoint, strokeColor));
         }
 
