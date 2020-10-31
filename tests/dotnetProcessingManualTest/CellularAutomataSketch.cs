@@ -99,7 +99,8 @@ namespace dotnetProcessingManualTest
         }
         public override void Draw()
         {
-            
+            drawActualRule();
+            noLoop();
         }
 
         protected override void mousePressed()
@@ -111,10 +112,9 @@ namespace dotnetProcessingManualTest
             else if (ruleNumber > 0)
             {
                 ruleNumber--;
-                
             }
+            loop();
             
-            drawActualRule();
             
         }
 
@@ -123,9 +123,6 @@ namespace dotnetProcessingManualTest
             size(800, 400);
             actual = new int[lineSize];            
             cellSize = (int)width / lineSize;
-
-            drawActualRule();
-            
         }        
     }
 }

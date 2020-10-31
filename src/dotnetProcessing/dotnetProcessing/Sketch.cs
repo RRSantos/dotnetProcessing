@@ -13,7 +13,9 @@ namespace dotnetProcessing
         private const int DEFAULT_HEIGHT = 480;
         private const string DEFAULT_TITLE = "dotnet Processing";
 
-        
+        private bool shouldDraw = true;
+
+
         private Drawing drawing;
 
         private RenderWindow window;
@@ -153,6 +155,16 @@ namespace dotnetProcessing
             return (float)internalRandom.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
         }
 
+        protected void noLoop()
+        {
+            shouldDraw = false;
+        }
+
+        protected void loop()
+        {
+            shouldDraw = true;
+        }
+
 
         public Sketch()
         {
@@ -169,10 +181,13 @@ namespace dotnetProcessing
             while (window.IsOpen)
             {
                 window.DispatchEvents();
-                Draw();
+                if (shouldDraw)
+                {
+                    Draw();
+                }                
 
                 if (needsRefresh)
-                {   
+                {
                     window.Display();
                     needsRefresh = false;
                     transformation.Clear();
