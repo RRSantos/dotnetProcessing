@@ -33,7 +33,7 @@ namespace dotnetProcessing
         protected void pop()
         {
             transformation = transformationStack.Pop();
-            drawing.SetTransformation(transformation);
+            //drawing.SetTransformation(transformation);
         }
     }
 }

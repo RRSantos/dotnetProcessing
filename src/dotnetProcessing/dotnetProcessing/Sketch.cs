@@ -15,10 +15,14 @@ namespace dotnetProcessing
 
         private bool shouldDraw = true;
 
+        private bool isInternalFieldsAlreadyInitialized = false;
 
-        private Drawing drawing;
+        private PGraphics graphics; //= new PGraphics(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-        private RenderWindow window;
+
+        //private Drawing drawing;
+
+        //private RenderWindow window;
 
         private Random internalRandom = new Random();
 
@@ -29,41 +33,47 @@ namespace dotnetProcessing
         protected bool needsRefresh = false;
         
         
-        protected uint width;
-        protected uint height;
+        protected int width;
+        protected int height;
 
 
         private void Window_KeyReleased(object sender, KeyEventArgs e)
         {
-            if (e.Code == Keyboard.Key.Escape)
-            {
-                window.Close();
-            }
+            //if (e.Code == Keyboard.Key.Escape)
+            //{
+            //    window.Close();
+            //}
         }
 
         private void initializeInternalFields()
         {
             initializeWindow();
-            drawing = new Drawing(window, transformation);
+            if (graphics!= null)
+            {
+                graphics.Dispose();
+            }
+            graphics = new PGraphics(width, height);
+            isInternalFieldsAlreadyInitialized = true;
+            
         }
 
         private void initializeWindow()
         {   
-            if (window != null)
-            {
-                window.Dispose();
-            }
+            //if (window != null)
+            //{
+            //    window.Dispose();
+            //}
 
-            VideoMode video = new VideoMode(width, height);
-            ContextSettings settings = new ContextSettings();
-            settings.AntialiasingLevel = 0;
-            window = new RenderWindow(video, windowTitle, Styles.Default, settings);
+            //VideoMode video = new VideoMode((uint)width, (uint)height);
+            //ContextSettings settings = new ContextSettings();
+            //settings.AntialiasingLevel = 0;
+            //window = new RenderWindow(video, windowTitle, Styles.Default, settings);
             
-            window.SetFramerateLimit(60);
-            window.Closed += (_, __) => window.Close();
-            window.KeyReleased += Window_KeyReleased;
-            window.MouseButtonPressed += Window_MouseButtonPressed;
-            window.MouseButtonReleased += Window_MouseButtonReleased;
+            //window.SetFramerateLimit(60);
+            //window.Closed += (_, __) => window.Close();
+            //window.KeyReleased += Window_KeyReleased;
+            //window.MouseButtonPressed += Window_MouseButtonPressed;
+            //window.MouseButtonReleased += Window_MouseButtonReleased;
         }
 
         private void Window_MouseButtonReleased(object sender, MouseButtonEventArgs e)
@@ -91,7 +101,7 @@ namespace dotnetProcessing
             mousePressed();
         }
 
-        protected void size(uint width, uint height)
+        protected void size(int width, int height)
         {
             this.width = width;
             this.height = height;
@@ -101,7 +111,7 @@ namespace dotnetProcessing
         protected void title(string newTitle)
         {
             windowTitle = newTitle;
-            window.SetTitle(windowTitle);
+            //window.SetTitle(windowTitle);
         }
         
         protected void colorMode(ColorMode colorMode)
@@ -121,7 +131,7 @@ namespace dotnetProcessing
 
         protected void frameRate(int frameRate)
         {
-            window.SetFramerateLimit((uint)frameRate);
+            //window.SetFramerateLimit((uint)frameRate);
         }
 
         protected float noise(double x)
@@ -174,29 +184,36 @@ namespace dotnetProcessing
         public Sketch()
         {
             width = DEFAULT_WIDTH;
-            height = DEFAULT_HEIGHT;            
-            initializeInternalFields();
+            height = DEFAULT_HEIGHT;
             windowTitle = DEFAULT_TITLE;
         }
 
         public void Run()
-        {
+        {   
             Setup();
-            
-            while (window.IsOpen)
+
+            if (!isInternalFieldsAlreadyInitialized)
             {
-                window.DispatchEvents();
+                initializeInternalFields();
+            }
+            
+
+            while (true)
+            {
+                graphics.BeginDraw();
+
                 if (shouldDraw)
                 {
                     Draw();
                 }                
 
                 if (needsRefresh)
-                {   
-                    window.Display();
+                {
                     needsRefresh = false;
                     transformation.Clear();
                 }
+
+                graphics.EndDraw();
             }
             
         }

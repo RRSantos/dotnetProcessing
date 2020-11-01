@@ -8,133 +8,134 @@ namespace dotnetProcessing
     {
         protected void noStroke()
         {
-            drawing.NoStroke();
+            graphics.NoStroke();
+            //drawing.NoStroke();
         }
 
         protected void stroke(float gray)
         {
-            drawing.SetStrokeColor(gray);
+            graphics.Stroke(gray);
         }
 
         protected void stroke(float gray, byte alpha)
         {
-            drawing.SetStrokeColor(gray, alpha);
+            graphics.Stroke(gray, alpha);
         }
 
         protected void stroke(float v1, float v2, float v3)
         {
-            drawing.SetStrokeColor(v1, v2, v3);
+            graphics.Stroke(v1, v2, v3);
         }
 
         protected void stroke(float v1, float v2, float v3, byte alpha)
         {
-            drawing.SetStrokeColor(v1, v2, v3, alpha);
+            graphics.Stroke(v1, v2, v3, alpha);
         }
 
         protected void strokeWeight(float weight)
         {
-            drawing.SetStrokeWeight(weight);
+            graphics.StrokeWeight(weight);
         }
 
         
 
         protected void fill(float gray)
         {
-            drawing.SetFillColor(gray);
+            graphics.Fill(gray);
         }
 
         protected void fill(float gray, byte alpha)
         {
-            drawing.SetFillColor(gray, alpha);
+            graphics.Fill(gray, alpha);
         }
 
         protected void fill(float v1, float v2, float v3)
         {
-            drawing.SetFillColor(v1, v2, v3);
+            graphics.Fill(v1, v2, v3);
         }
 
         protected void fill(float v1, float v2, float v3, byte alpha)
         {
-            drawing.SetFillColor(v1, v2, v3, alpha);
+            graphics.Fill(v1, v2, v3, alpha);
         }
 
         protected void noFill()
         {
-            drawing.SetNoFillColor();
+            graphics.NoFill();
         }
 
         protected void circle(float x, float y, float radius)
         {
-            drawing.DrawCircle(x, y, radius);
+            graphics.Circle(x, y, radius);
             needsRefresh = true;
         }
 
         protected void rect(float x, float y, float width, float heigth)
         {
-            drawing.DrawRectangle(x, y, width, heigth);
+            graphics.Rect(x, y, width, heigth);
             needsRefresh = true;
         }
 
         protected void square(float x, float y, float sideLength)
         {
-            drawing.DrawSquare(x, y, sideLength);
+            graphics.Square(x, y, sideLength);
             needsRefresh = true;
         }
 
         protected void ellipse(float x, float y, float width, float height)
         {
-            drawing.DrawEllipse(x, y, width, height);
+            graphics.Ellipse(x, y, width, height);
             needsRefresh = true;
         }
         protected void point(int x, int y)
         {
-            drawing.DrawPoint(x, y);
+            graphics.Point(x, y);
             needsRefresh = true;
         }
 
         protected void line(float x1, float y1, float x2, float y2)
         {
-            drawing.DrawLine(x1, y1,x2,y2);
+            graphics.Line(x1, y1,x2,y2);
             needsRefresh = true;
         }
 
         protected void background(float gray)
         {
-            drawing.SetBackgroundColor(gray);
+            graphics.Background(gray);
             needsRefresh = true;
         }
 
         protected void background(float gray, byte alpha)
         {
-            drawing.SetBackgroundColor(gray, alpha);
+            graphics.Background(gray, alpha);
             needsRefresh = true;
         }
 
         protected void background(float v1, float v2, float v3)
         {
-            drawing.SetBackgroundColor(v1, v2, v3, 255);
+            graphics.Background(v1, v2, v3, 255);
             needsRefresh = true;
         }
 
         protected void background(float v1, float v2, float v3, byte alpha)
         {
-            drawing.SetBackgroundColor(v1, v2, v3, alpha);
+            graphics.Background(v1, v2, v3, alpha);
             needsRefresh = true;
         }
 
         protected void beginShape()
         {
-            drawing.ClearShape();
+            graphics.BeginShape();
         }
 
         protected void vertex(float x, float y)
         {
-            drawing.AddShapePoint(x, y);
+            graphics.Vertex(x, y);
         }
 
         protected void endShape()
         {
-            drawing.DrawShape();
+            graphics.EndShape();
             needsRefresh = true;
         }
     }
