@@ -40,7 +40,6 @@ namespace dotnetProcessing.Core
         
 
         private uint rgbaValue;
-
         
 
         private void validateRGBRangeValues(float r, float g, float b)
@@ -66,6 +65,8 @@ namespace dotnetProcessing.Core
         public byte Green { get { return GetGreen(rgbaValue); } }
         public byte Blue { get { return GetBlue(rgbaValue); } }
         public byte Alpha { get { return GetAlpha(rgbaValue); } }
+
+        public uint RGBA { get { return rgbaValue; } }
 
         public PColor()
         {
