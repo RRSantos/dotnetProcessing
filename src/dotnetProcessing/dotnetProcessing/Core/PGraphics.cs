@@ -5,15 +5,53 @@ using System.Text;
 
 namespace dotnetProcessing.Core
 {
-    public class PGraphics:IDisposable
+    public class PGraphics: PImage
     {
         private IDrawable drawable;
         private  Transformation transformation;
 
+        protected bool hasStroke = true;
+        protected PColor strokeColor;
+        protected PColor fillColor;
+
         public PGraphics()
             :this(100,100)
         {
-            
+            strokeColor = new PColor();
+            fillColor = new PColor();
+            transformation = new Transformation();
+        }
+
+        public void Stroke(float v1, float v2, float v3)
+        {
+            strokeColor.SetColor(v1, v2, v3);            
+        }
+
+
+        public void Stroke(float v1, float v2, float v3, byte alpha)
+        {
+            strokeColor.SetColor(v1, v2, v3, alpha);
+        }
+
+        public void Stroke(float gray)
+        {
+            strokeColor.SetColor(gray);
+        }
+
+
+        public void Stroke(float gray, byte alpha)
+        {
+            strokeColor.SetColor(gray,alpha);
+        }
+
+        public void Stroke(int rgb, byte alpha)
+        {
+            strokeColor.SetColor(rgb, alpha);
+        }
+
+        public void Stroke(int rgb)
+        {
+            strokeColor.SetColor(rgb);
         }
 
         public PGraphics(int width, int height)
@@ -36,25 +74,25 @@ namespace dotnetProcessing.Core
             drawable.NoStroke();
         }
 
-        public void Stroke(float gray)
-        {
-            drawable.SetStrokeColor(gray);
-        }
+        //public void Stroke(float gray)
+        //{
+        //    drawable.SetStrokeColor(gray);
+        //}
 
-        public void Stroke(float gray, byte alpha)
-        {
-            drawable.SetStrokeColor(gray, alpha);
-        }
+        //public void Stroke(float gray, byte alpha)
+        //{
+        //    drawable.SetStrokeColor(gray, alpha);
+        //}
 
-        public void Stroke(float v1, float v2, float v3)
-        {
-            drawable.SetStrokeColor(v1, v2, v3);
-        }
+        //public void Stroke(float v1, float v2, float v3)
+        //{
+        //    drawable.SetStrokeColor(v1, v2, v3);
+        //}
 
-        public void Stroke(float v1, float v2, float v3, byte alpha)
-        {
-            drawable.SetStrokeColor(v1, v2, v3, alpha);
-        }
+        //public void Stroke(float v1, float v2, float v3, byte alpha)
+        //{
+        //    drawable.SetStrokeColor(v1, v2, v3, alpha);
+        //}
 
         public void StrokeWeight(float weight)
         {
@@ -171,9 +209,6 @@ namespace dotnetProcessing.Core
 
         }
 
-        public void Dispose()
-        {
-            drawable.Dispose();
-        }
+
     }
 }

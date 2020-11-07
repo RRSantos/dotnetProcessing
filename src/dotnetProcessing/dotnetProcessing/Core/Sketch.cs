@@ -50,7 +50,7 @@ namespace dotnetProcessing.Core
             initializeWindow();
             if (graphics!= null)
             {
-                graphics.Dispose();
+                //graphics.Dispose();
             }
             graphics = new PGraphics(width, height);
             isInternalFieldsAlreadyInitialized = true;
@@ -116,7 +116,7 @@ namespace dotnetProcessing.Core
         
         protected void colorMode(ColorMode colorMode)
         {
-            ColorHelper.SetColorMode(colorMode);
+            PColor.SetColorMode(colorMode);
         }
 
         protected float radians(float degrees)
