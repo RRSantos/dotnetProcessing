@@ -1,9 +1,4 @@
-﻿using dotnetProcessing.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace dotnetProcessing.Core
+﻿namespace dotnetProcessing.Core
 {
     public class PGraphics: PImage
     {
