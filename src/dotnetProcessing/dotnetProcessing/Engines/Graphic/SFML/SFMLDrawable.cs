@@ -3,6 +3,7 @@ using dotnetProcessing.Helpers;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using dotnetProcessing.Core;
 
 namespace dotnetProcessing.Engines.Graphic.SFML
 {

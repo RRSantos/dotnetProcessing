@@ -1,7 +1,7 @@
 ﻿using SFML.System;
 using System.Collections.Generic;
 
-namespace dotnetProcessing
+namespace dotnetProcessing.Core
 {
     partial class Sketch
     {

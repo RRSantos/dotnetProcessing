@@ -1,6 +1,7 @@
 ﻿using dotnetProcessing.Helpers;
 using SFML.Graphics;
 using SFML.System;
+using dotnetProcessing.Core;
 
 namespace dotnetProcessing
 {

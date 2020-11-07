@@ -1,4 +1,4 @@
-﻿using dotnetProcessing;
+﻿using dotnetProcessing.Core;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

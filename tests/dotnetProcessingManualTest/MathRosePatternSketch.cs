@@ -1,4 +1,4 @@
-﻿using dotnetProcessing;
+﻿using dotnetProcessing.Core;
 using System;
 
 namespace dotnetProcessingManualTest

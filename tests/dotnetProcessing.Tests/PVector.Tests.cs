@@ -1,7 +1,7 @@
 using System;
 using Xunit;
-using dotnetProcessing;
-using SFML.Graphics;
+using dotnetProcessing.Core;
+
 
 namespace dotnetProcessing.Tests
 {

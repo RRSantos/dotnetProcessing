@@ -2,7 +2,7 @@
 using SFML.System;
 using System;
 
-namespace dotnetProcessing
+namespace dotnetProcessing.Core
 {
     partial class Sketch
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using dotnetProcessing.Core;
 
 namespace dotnetProcessing
 {

@@ -1,4 +1,4 @@
-﻿using dotnetProcessing;
+﻿using dotnetProcessing.Core;
 using dotnetProcessing.Helpers;
 using System;
 using System.Collections.Generic;

@@ -3,7 +3,7 @@ using SFML.Graphics;
 using SFML.Window;
 using System;
 
-namespace dotnetProcessing
+namespace dotnetProcessing.Core
 {
     public abstract partial class Sketch
     {

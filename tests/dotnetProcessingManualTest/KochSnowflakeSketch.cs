@@ -1,4 +1,4 @@
-﻿using dotnetProcessing;
+﻿using dotnetProcessing.Core;
 using SFML.Window;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using dotnetProcessing;
+﻿using dotnetProcessing.Core;
 using dotnetProcessing.Helpers;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace dotnetProcessingManualTest
         
         //Poligono
         List<Point> points = new List<Point>();
-        Random random = new Random();
+        Random  internalRandom = new Random();
         Point lastPoint;
         int pointRadius = 3;
         double distanceFactor = 1/2d;
@@ -71,10 +71,10 @@ namespace dotnetProcessingManualTest
         private void drawChaosGameSquare()
         {
             translate(width / 2, height / 2);
-            int lastIndex = random.Next(points.Count);
+            int lastIndex = internalRandom.Next(points.Count);
             for (int i = 0; i < 500; i++)
             {
-                int signal = Math.Sign(random.Next(points.Count) - random.Next(points.Count));
+                int signal = Math.Sign(internalRandom.Next(points.Count) - internalRandom.Next(points.Count));
                 int nextIndex = (lastIndex + signal + points.Count) % points.Count; 
 
                 lastIndex = nextIndex;
@@ -104,7 +104,7 @@ namespace dotnetProcessingManualTest
             translate(width / 2, height / 2);
             for (int i = 0; i < 500; i++)
             {
-                int nextIndex = random.Next(points.Count);
+                int nextIndex = internalRandom.Next(points.Count);
 
                 Point randomVertex = points[nextIndex];
                 double xDiff = randomVertex.X + lastPoint.X;
@@ -160,8 +160,8 @@ namespace dotnetProcessingManualTest
             }
 
 
-            int randomX = random.Next((int)width);
-            int randomY = random.Next((int)height);
+            int randomX = internalRandom.Next((int)width);
+            int randomY = internalRandom.Next((int)height);
             lastPoint = new Point(randomX, randomY);
             fill(255, 0, 255);
             stroke(255, 0, 255);
