@@ -1,117 +1,36 @@
 ﻿using dotnetProcessing.Helpers;
-using SFML.Graphics;
-using SFML.Window;
+using dotnetProcessing.SFML;
 using System;
 
 namespace dotnetProcessing.Core
 {
     public abstract partial class Sketch
-    {
-        
-        
-        private const int DEFAULT_WIDTH = 640;
-        private const int DEFAULT_HEIGHT = 480;
-        private const string DEFAULT_TITLE = "dotnet Processing";
+    {   
 
-        private bool shouldDraw = true;
+        private readonly PGraphics graphics;
+        private readonly IPSurface surface;        
 
-        private bool isInternalFieldsAlreadyInitialized = false;
-
-        private PGraphics graphics; //= new PGraphics(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-
-
-        //private Drawing drawing;
-
-        //private RenderWindow window;
-
-        private Random internalRandom = new Random();
+        private readonly Random internalRandom = new Random();
 
         private PerlinNoise perlin = new PerlinNoise();
-
-        private string windowTitle;
 
         protected bool needsRefresh = false;
         
         
-        protected int width;
-        protected int height;
-
-
-        private void Window_KeyReleased(object sender, KeyEventArgs e)
-        {
-            //if (e.Code == Keyboard.Key.Escape)
-            //{
-            //    window.Close();
-            //}
-        }
-
-        private void initializeInternalFields()
-        {
-            initializeWindow();
-            if (graphics!= null)
-            {
-                //graphics.Dispose();
-            }
-            graphics = new PGraphics(width, height);
-            isInternalFieldsAlreadyInitialized = true;
-            
-        }
-
-        private void initializeWindow()
-        {   
-            //if (window != null)
-            //{
-            //    window.Dispose();
-            //}
-
-            //VideoMode video = new VideoMode((uint)width, (uint)height);
-            //ContextSettings settings = new ContextSettings();
-            //settings.AntialiasingLevel = 0;
-            //window = new RenderWindow(video, windowTitle, Styles.Default, settings);
-            
-            //window.SetFramerateLimit(60);
-            //window.Closed += (_, __) => window.Close();
-            //window.KeyReleased += Window_KeyReleased;
-            //window.MouseButtonPressed += Window_MouseButtonPressed;
-            //window.MouseButtonReleased += Window_MouseButtonReleased;
-        }
-
-        private void Window_MouseButtonReleased(object sender, MouseButtonEventArgs e)
-        {
-            isMousePressed = false;
-            mouseButton = 0;
-            mouseReleased();
-        }
-
-        private void Window_MouseButtonPressed(object sender, MouseButtonEventArgs e)
-        {
-            isMousePressed = true;
-            if (e.Button == Mouse.Button.Left)
-            {
-                mouseButton = LEFT;
-            }
-            else if (e.Button == Mouse.Button.Right)
-            {
-                mouseButton = RIGHT;
-            }
-            else
-            {
-                mouseButton = CENTER;
-            }
-            mousePressed();
-        }
+        protected int width = IPSurface.MIN_WINDOW_WIDTH;
+        protected int height = IPSurface.MIN_WINDOW_WIDTH;
+        
 
         protected void size(int width, int height)
         {
             this.width = width;
             this.height = height;
-            initializeInternalFields();
+            surface.SetSize(width, height);
         }
 
         protected void title(string newTitle)
         {
-            windowTitle = newTitle;
-            //window.SetTitle(windowTitle);
+            surface.SetTitle(newTitle);            
         }
         
         protected void colorMode(ColorMode colorMode)
@@ -129,9 +48,9 @@ namespace dotnetProcessing.Core
             return ConvertionHelper.RadiansToDegrees(radians);
         }
 
-        protected void frameRate(int frameRate)
+        protected void frameRate(float frameRate)
         {
-            //window.SetFramerateLimit((uint)frameRate);
+            surface.SetFrameRate(frameRate);
         }
 
         protected float noise(double x)
@@ -167,12 +86,12 @@ namespace dotnetProcessing.Core
 
         protected void noLoop()
         {
-            shouldDraw = false;
+            //shouldDraw = false;
         }
 
         protected void loop()
         {
-            shouldDraw = true;
+            //shouldDraw = true;
         }
 
         protected void redraw()
@@ -183,39 +102,15 @@ namespace dotnetProcessing.Core
 
         public Sketch()
         {
-            width = DEFAULT_WIDTH;
-            height = DEFAULT_HEIGHT;
-            windowTitle = DEFAULT_TITLE;
+            graphics = new PGraphicsSFML();
+            surface = graphics.GetSurface();
+            surface.InitFrame(this);
+            
         }
 
         public void Run()
-        {   
-            Setup();
-
-            if (!isInternalFieldsAlreadyInitialized)
-            {
-                initializeInternalFields();
-            }
-            
-
-            while (true)
-            {
-                graphics.BeginDraw();
-
-                if (shouldDraw)
-                {
-                    Draw();
-                }                
-
-                if (needsRefresh)
-                {
-                    needsRefresh = false;
-                    transformation.Clear();
-                }
-
-                graphics.EndDraw();
-            }
-            
+        {
+            surface.StartThread();
         }
 
         public abstract void Setup();

@@ -10,19 +10,19 @@ namespace dotnetProcessing.Core
 
 
         protected void translate(float x, float y, float z)
-        {   
-            transformation.Translate(x, y, z);
+        {
+            graphics.Translate(x, y, z);
         }
 
         protected void translate(float x, float y)
         {
-            translate(x, y, 0);
+            graphics.Translate(x, y);
         }
 
         protected void rotate(float angleInRadians)
         {
             float newAngle = transformation.Angle + angleInRadians;
-            transformation.SetAngle(newAngle);            
+            graphics.Rotate(newAngle);
         }
 
         protected void push()

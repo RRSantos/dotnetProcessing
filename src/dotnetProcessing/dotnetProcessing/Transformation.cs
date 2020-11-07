@@ -3,7 +3,7 @@ using dotnetProcessing.Core;
 
 namespace dotnetProcessing
 {
-    class Transformation
+    public class Transformation
     {
         public float Angle { get; protected set; }
         
@@ -52,9 +52,11 @@ namespace dotnetProcessing
 
         public Transformation Copy()
         {
-            Transformation transformationCopy = new Transformation();
-            transformationCopy.Angle = Angle;
-            transformationCopy.origin = origin.Copy();
+            Transformation transformationCopy = new Transformation
+            {
+                Angle = Angle,
+                origin = origin.Copy()
+            };
             return transformationCopy;
 
         }

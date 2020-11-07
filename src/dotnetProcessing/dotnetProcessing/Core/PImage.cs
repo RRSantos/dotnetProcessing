@@ -6,5 +6,6 @@ namespace dotnetProcessing.Core
 {
     public class PImage
     {
+        protected IPSurface surface;
     }
 }

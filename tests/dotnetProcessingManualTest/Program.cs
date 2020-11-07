@@ -19,10 +19,10 @@ namespace dotnetProcessingManualTest
             var availableOptions = helper.GetAvaliableOptions().ToList();
             for (int i = 1; i < availableOptions.Count; i++)
             {   
-                Console.WriteLine($"{i} - {availableOptions[i]}");
+                Console.WriteLine($"{i:00} - {availableOptions[i]}");
             }
 
-            Console.WriteLine($"{0} - {availableOptions[0]}");
+            Console.WriteLine($"{0:00} - {availableOptions[0]}");
         }
 
         private static int showMenuAndGetUserChoice()
@@ -80,6 +80,8 @@ namespace dotnetProcessingManualTest
             avaliableOptions.Add("Perlin noise");
             avaliableOptions.Add("Phyllotaxis");
             avaliableOptions.Add("Random walker");
+            avaliableOptions.Add("Simple sketch");
+            
         }
 
         public SketchHelper()
@@ -109,6 +111,8 @@ namespace dotnetProcessingManualTest
                     return new PhylloTaxisSketch();
                 case 9:
                     return new RandomWalkerSketch();
+                case 10:
+                    return new SimpleSketch();
                 default:
                     return null;
             }

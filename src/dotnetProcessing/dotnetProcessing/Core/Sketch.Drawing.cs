@@ -113,7 +113,7 @@ namespace dotnetProcessing.Core
 
         protected void background(float v1, float v2, float v3)
         {
-            graphics.Background(v1, v2, v3, 255);
+            graphics.Background(v1, v2, v3);
             needsRefresh = true;
         }
 
