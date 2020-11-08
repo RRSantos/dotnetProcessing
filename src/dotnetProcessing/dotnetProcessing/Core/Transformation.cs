@@ -1,7 +1,6 @@
 ﻿using System;
-using dotnetProcessing.Core;
 
-namespace dotnetProcessing
+namespace dotnetProcessing.Core
 {
     public class Transformation
     {

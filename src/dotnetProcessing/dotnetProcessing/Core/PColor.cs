@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace dotnetProcessing.Core
 {
@@ -103,13 +101,6 @@ namespace dotnetProcessing.Core
                 return rgbaToUInt(v, p, q, alpha);
             
         }
-
-
-        
-
-
-
-
 
         public byte Red { get { return GetRed(rgbaValue); } }
         public byte Green { get { return GetGreen(rgbaValue); } }
