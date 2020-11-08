@@ -2,10 +2,6 @@
 using SFML.Graphics;
 using SFML.Window;
 using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
-using System.Threading;
 
 namespace dotnetProcessing.SFML
 {
@@ -13,6 +9,8 @@ namespace dotnetProcessing.SFML
     {
         private int width = IPSurface.MIN_WINDOW_WIDTH; 
         private int height = IPSurface.MIN_WINDOW_HEIGHT;
+        private uint framerate = IPSurface.DEFAULT_FRAME_RATE;
+
         private bool isThreadStopped = true;
         private bool refreshPending = false;
 
@@ -40,7 +38,7 @@ namespace dotnetProcessing.SFML
             window = new RenderWindow(video, title, Styles.Default);
             attachEventsToWindow();
             graphicsSFML.SetWindow(window);
-
+            window.SetFramerateLimit(framerate);
         }
 
         public PSurfaceSFML(PGraphicsSFML graphicsSFML)
@@ -110,7 +108,7 @@ namespace dotnetProcessing.SFML
 
         public void SetFrameRate(float fps)
         {
-            throw new NotImplementedException();
+            window.SetFramerateLimit((uint)fps);
         }
 
         public void SetIcon(PImage icon)
@@ -160,18 +158,17 @@ namespace dotnetProcessing.SFML
 
         public void SetVisible(bool visible)
         {
-            throw new NotImplementedException();
+            window.SetVisible(visible);
         }
 
         public void ShowCursor()
-        {
+        {   
             throw new NotImplementedException();
         }
 
         public void StartThread()
         {
             internalSketch.Setup();
-            //window.Display();
             isThreadStopped = false;            
 
             while (!isThreadStopped && window.IsOpen)
