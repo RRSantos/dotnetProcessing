@@ -9,6 +9,7 @@ namespace dotnetProcessing.Core
         static int MIN_WINDOW_WIDTH = 128;
         static int MIN_WINDOW_HEIGHT = 128;
         static uint DEFAULT_FRAME_RATE = 60;
+        static string DEFAULT_WINDOW_TITLE = "Untitled window";
 
         void InitOffscreen(Sketch sketch);
 

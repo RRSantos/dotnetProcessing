@@ -10,6 +10,7 @@ namespace dotnetProcessing.SFML
         private int width = IPSurface.MIN_WINDOW_WIDTH; 
         private int height = IPSurface.MIN_WINDOW_HEIGHT;
         private uint framerate = IPSurface.DEFAULT_FRAME_RATE;
+        private string title = IPSurface.DEFAULT_WINDOW_TITLE;
 
         private bool isThreadStopped = true;
         private bool refreshPending = false;
@@ -19,7 +20,7 @@ namespace dotnetProcessing.SFML
         private Sketch internalSketch;
         private readonly PGraphicsSFML graphicsSFML;
 
-        private string title = "Untitled window";
+        
 
 
         private void attachEventsToWindow()
@@ -108,7 +109,8 @@ namespace dotnetProcessing.SFML
 
         public void SetFrameRate(float fps)
         {
-            window.SetFramerateLimit((uint)fps);
+            framerate = (uint)fps;
+            window.SetFramerateLimit(framerate);
         }
 
         public void SetIcon(PImage icon)
