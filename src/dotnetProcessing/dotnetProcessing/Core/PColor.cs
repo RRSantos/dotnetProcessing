@@ -40,8 +40,19 @@ namespace dotnetProcessing.Core
         
 
         private uint rgbaValue;
-        
 
+        private void validateSaturationAndValueRange(float saturation, float value)
+        {
+            if (saturation < 0 || saturation > 1)
+            {
+                throw new ArgumentException("Saturation value is out of bounds. Permitted values: [0,1]");
+            }
+
+            if (value < 0 || value > 1)
+            {
+                throw new ArgumentException("Brightness value is out of bounds. Permitted values: [0,1]");
+            }
+        }
         private void validateRGBRangeValues(float r, float g, float b)
         {
             if (r < 0 || r > 255)
@@ -54,11 +65,50 @@ namespace dotnetProcessing.Core
                 throw new ArgumentException("Blue value is out of bounds. Permitted values: integers from 0 to 255");
         }
 
-        private uint rgbaToUInt(byte red, byte green, byte blue, byte alpha)
+        private uint rgbaToUInt(float red, float green, float blue, byte alpha)
         {
-            uint result = (uint)((red << 24) | (green << 16) | (blue << 8) | alpha);
+            validateRGBRangeValues(red, green, blue);
+            byte r = (byte)red;
+            byte g = (byte)green;
+            byte b = (byte)blue;            
+
+            uint result = (uint)((r << 24) | (g << 16) | (b << 8) | alpha);
             return result;
         }
+
+        private uint hsvaToUInt(float hue, float saturation, float value, byte alpha)
+        {
+            validateSaturationAndValueRange(saturation, value);
+
+            int hi = (int)(Math.Floor(hue / 60)) % 6;
+            double f = hue / 60 - Math.Floor(hue / 60);
+
+            value *= 255;
+            byte v = (byte)value;
+            byte p = (byte)(value * (1 - saturation));
+            byte q = (byte)(value * (1 - f * saturation));
+            byte t = (byte)(value * (1 - (1 - f) * saturation));
+
+            if (hi == 0)
+                return rgbaToUInt(v, t, p, alpha);
+            else if (hi == 1)
+                return rgbaToUInt(q, v, p, alpha);
+            else if (hi == 2)
+                return rgbaToUInt(p, v, t, alpha);
+            else if (hi == 3)
+                return rgbaToUInt(p, q, v, alpha);
+            else if (hi == 4)
+                return rgbaToUInt(t, p, v, alpha);
+            else
+                return rgbaToUInt(v, p, q, alpha);
+            
+        }
+
+
+        
+
+
+
 
 
         public byte Red { get { return GetRed(rgbaValue); } }
@@ -77,16 +127,12 @@ namespace dotnetProcessing.Core
         public void SetColor(float v1, float v2, float v3, byte alpha)
         {
             if (isRGB)
-            {
-                validateRGBRangeValues(v1, v2, v3);
-                byte r = Convert.ToByte(v1);
-                byte g = Convert.ToByte(v2);
-                byte b = Convert.ToByte(v3);
-                rgbaValue = rgbaToUInt(r, g, b, alpha);
+            {   
+                rgbaValue = rgbaToUInt(v1, v2, v3, alpha);
             }
             else 
             {
-                throw new NotImplementedException("HSV color mode not implemented");
+                rgbaValue = hsvaToUInt(v1, v2, v3, alpha);
             }
         }
 
