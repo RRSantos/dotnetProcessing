@@ -11,7 +11,8 @@ namespace dotnetProcessing.SFML
 {
     class PGraphicsSFML:PGraphics
     {
-        
+        private readonly Stack<Transformation> transformationStack = new Stack<Transformation>();
+
         private RenderWindow window;
         private readonly VertexArray shapePoints;
         
@@ -159,6 +160,26 @@ namespace dotnetProcessing.SFML
         public void SetWindow(RenderWindow window)
         {
             this.window = window;
+        }
+
+        public override void PopMatrix()
+        {
+            transformation = transformationStack.Pop();
+        }
+
+        public override void PopStyle()
+        {
+
+        }
+
+        public override void PushMatrix()
+        {
+            transformationStack.Push(transformation.Copy());
+        }
+
+        public override void PushStyle()
+        {
+
         }
 
 

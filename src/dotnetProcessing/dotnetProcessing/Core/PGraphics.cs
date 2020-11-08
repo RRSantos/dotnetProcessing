@@ -1,4 +1,6 @@
-﻿namespace dotnetProcessing.Core
+﻿using System;
+
+namespace dotnetProcessing.Core
 {
     public class PGraphics: PImage
     {
@@ -263,6 +265,38 @@
         {
             float newAngle = transformation.Angle + angleInRadians;
             transformation.SetAngle(newAngle);
+        }
+
+        public void Pop()
+        {
+            PopMatrix();
+            PopStyle();
+        }
+
+        public virtual void PopMatrix()
+        {   
+            
+        }
+
+        public virtual void PopStyle()
+        {
+            
+        }
+
+        public void Push()
+        {
+            PushMatrix();
+            PushStyle();
+        }
+
+        public virtual void PushMatrix()
+        {
+
+        }
+
+        public virtual void PushStyle()
+        {
+
         }
 
 
