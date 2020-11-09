@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace dotnetProcessing.Tests
+namespace dotnetProcessing.Tests.Core
 {
     public class PColorTests
     {

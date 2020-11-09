@@ -81,7 +81,8 @@ namespace dotnetProcessingManualTest
             avaliableOptions.Add("Phyllotaxis");
             avaliableOptions.Add("Random walker");
             avaliableOptions.Add("Simple sketch");
-            
+            avaliableOptions.Add("Events sketch");
+
         }
 
         public SketchHelper()
@@ -113,6 +114,8 @@ namespace dotnetProcessingManualTest
                     return new RandomWalkerSketch();
                 case 10:
                     return new SimpleSketch();
+                case 11:
+                    return new EventsSketch();
                 default:
                     return null;
             }

@@ -3,7 +3,7 @@ using Xunit;
 using dotnetProcessing.Core;
 
 
-namespace dotnetProcessing.Tests
+namespace dotnetProcessing.Tests.Core
 {
     public class PVectorTests
     {
