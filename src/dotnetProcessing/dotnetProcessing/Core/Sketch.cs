@@ -1,14 +1,21 @@
 ﻿using dotnetProcessing.Helpers;
 using dotnetProcessing.SFML;
 using System;
+using System.Collections.Generic;
 
 namespace dotnetProcessing.Core
 {
     public abstract partial class Sketch
-    {   
+    {
+        
 
-        private readonly PGraphics graphics;
-        private readonly IPSurface surface;
+        private readonly PGraphicsBuffer graphicsBuffer;
+
+        private string internalTitle = string.Empty;
+        private float internalFrameRate = 0;
+        private PGraphics graphics;
+        
+        private IPSurface surface;
 
         private readonly Random internalRandom = new Random();
 
@@ -19,18 +26,51 @@ namespace dotnetProcessing.Core
 
         protected int width = IPSurface.MIN_WINDOW_WIDTH;
         protected int height = IPSurface.MIN_WINDOW_WIDTH;
-        
+
+        protected const byte P2D = PConstants.P2D;
+        protected const byte P3D = PConstants.P3D;
+
+        protected byte render = PConstants.P2D;
+
+        protected PGraphics createGraphics(int graphicsWidth, int graphicsHeight, byte graphicsRender)
+        {   
+            if (graphicsRender == P2D)
+            {
+                return new PGraphicsSFML(graphicsWidth, graphicsHeight);
+            }
+            throw new NotImplementedException("Render not implemented");
+        }
+
+        protected PGraphics createGraphics(int graphicsWidth, int graphicsHeight)
+        {
+            return createGraphics(graphicsWidth, graphicsHeight, render);
+        }
+
 
         protected void size(int width, int height)
         {
             this.width = width;
             this.height = height;
-            surface.SetSize(width, height);
+            if (surface != null)
+            {
+                surface.SetSize(width, height);
+            }
+            
+        }
+
+        protected void size(int width, int height, byte render)
+        {
+            this.render = render;
+            size(width, height);
         }
 
         protected void title(string newTitle)
         {
-            surface.SetTitle(newTitle);            
+            internalTitle = newTitle;
+            if (surface != null)
+            {
+                surface.SetTitle(internalTitle);
+            }
         }
         
         protected void colorMode(ColorMode colorMode)
@@ -50,7 +90,12 @@ namespace dotnetProcessing.Core
 
         protected void frameRate(float frameRate)
         {
-            surface.SetFrameRate(frameRate);
+            internalFrameRate = frameRate;
+            if (surface != null)
+            {
+                surface.SetFrameRate(internalFrameRate);
+            }
+                
         }
 
         protected float noise(double x)
@@ -96,20 +141,50 @@ namespace dotnetProcessing.Core
 
         protected void redraw()
         {
-            surface.RefreshNeeded();            
+            if (surface != null)
+            {
+                surface.RefreshNeeded();
+            }
+            
+        }
+
+        private void prepareFinalGraphicsAndSurface()
+        {
+            graphics = createGraphics(width, height);
+            surface = graphics.GetSurface();
+            surface.InitFrame(this);
+            if (!string.IsNullOrEmpty(internalTitle))
+            {
+                surface.SetTitle(internalTitle);
+            }
+
+            if (internalFrameRate > 0)
+            {
+                surface.SetFrameRate(internalFrameRate);
+            }
+
+
+            foreach (Action<PGraphics> pendingAction in graphicsBuffer.PendingActions)
+            {
+                pendingAction(graphics);
+            }
         }
 
 
         public Sketch()
         {
-            graphics = new PGraphicsSFML();
-            surface = graphics.GetSurface();
-            surface.InitFrame(this);
-            
+            graphicsBuffer = new PGraphicsBuffer();
+            graphics = graphicsBuffer;
+            colorMode(ColorMode.RGB);
+
         }
 
         public void Run()
-        {
+        {   
+            Setup();
+
+            prepareFinalGraphicsAndSurface();
+
             surface.StartThread();
         }
 

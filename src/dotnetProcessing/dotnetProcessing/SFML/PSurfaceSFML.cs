@@ -505,6 +505,8 @@ namespace dotnetProcessing.SFML
         public PSurfaceSFML(PGraphicsSFML graphicsSFML)
         {
             this.graphicsSFML = graphicsSFML;
+            width = this.graphicsSFML.Width;
+            height = this.graphicsSFML.Height;
             createWindow();
         }
         public object GetNative()
@@ -628,7 +630,7 @@ namespace dotnetProcessing.SFML
 
         public void StartThread()
         {
-            internalSketch.Setup();
+            //internalSketch.Setup();
             isThreadStopped = false;            
 
             while (!isThreadStopped && window.IsOpen)

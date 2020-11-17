@@ -142,14 +142,24 @@ namespace dotnetProcessing.SFML
         }
 
         public PGraphicsSFML()
+            :this(100,100)
         {
+            
+        }
+
+        public PGraphicsSFML(int width, int height)
+        {
+            Width = width;
+            Height = height;
             surface = new PSurfaceSFML(this);
             shapePoints = new VertexArray(PrimitiveType.LineStrip);
-            
+
         }
 
         public override void SetSize(int width, int height)
         {
+            Width = width;
+            Height = height;
             surface.SetSize(width, height);
         }
 

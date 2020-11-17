@@ -29,5 +29,9 @@ namespace dotnetProcessing.Core
         public const int CONTROL = 17;
         public const int SHIFT = 16;
 
+
+        public const byte P2D = 1;
+        public const byte P3D = 2;
+
     }
 }

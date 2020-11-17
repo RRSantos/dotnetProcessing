@@ -17,7 +17,10 @@ namespace dotnetProcessing.Core
 
 
         protected PColor backgroundColor;
-        
+
+        public int Width { get; protected set; }
+
+        public int Height { get; protected set; }
 
         public PGraphics()
         {
@@ -27,78 +30,78 @@ namespace dotnetProcessing.Core
             transformation = new Transformation();
         }
 
-        public void Stroke(float v1, float v2, float v3)
+        public virtual void Stroke(float v1, float v2, float v3)
         {
             hasStroke = true;
             strokeColor.SetColor(v1, v2, v3);
         }
 
 
-        public void Stroke(float v1, float v2, float v3, byte alpha)
+        public virtual void Stroke(float v1, float v2, float v3, byte alpha)
         {
             hasStroke = true;
             strokeColor.SetColor(v1, v2, v3, alpha);
         }
 
-        public void Stroke(float gray)
+        public virtual void Stroke(float gray)
         {
             hasStroke = true;
             strokeColor.SetColor(gray);
         }
 
-        public void Stroke(float gray, byte alpha)
+        public virtual void Stroke(float gray, byte alpha)
         {
             hasStroke = true;
             strokeColor.SetColor(gray,alpha);
         }
 
-        public void Stroke(int rgb, byte alpha)
+        public virtual void Stroke(int rgb, byte alpha)
         {
             hasStroke = true;
             strokeColor.SetColor(rgb, alpha);
         }
 
-        public void Stroke(int rgb)
+        public virtual void Stroke(int rgb)
         {
             hasStroke = true;
             strokeColor.SetColor(rgb);
         }
 
-        public void StrokeWeight(float weight)
+        public virtual void StrokeWeight(float weight)
         {
             strokeWeight = weight;
         }
 
-        public void NoStroke()
+        public virtual void NoStroke()
         {
             hasStroke = false;
         }
 
-        public void Fill(float gray)
+        public virtual void Fill(float gray)
         {
             hasFill = true;
             fillColor.SetColor(gray);
         }
 
-        public void Fill(float gray, byte alpha)
+        public virtual void Fill(float gray, byte alpha)
         {
             hasFill = true;
             fillColor.SetColor(gray, alpha);
         }
 
-        public void Fill(float v1, float v2, float v3)
+        public virtual void Fill(float v1, float v2, float v3)
         {
             hasFill = true;
             fillColor.SetColor(v1, v2, v3);
         }
 
-        public void Fill(float v1, float v2, float v3, byte alpha)
+        public virtual void Fill(float v1, float v2, float v3, byte alpha)
         {
             hasFill = true;
             fillColor.SetColor(v1, v2, v3, alpha);
         }
 
-        public void NoFill()
+        public virtual void NoFill()
         {
             hasFill = false;
         }
@@ -153,79 +156,79 @@ namespace dotnetProcessing.Core
 
 
 
-        public void Circle(float x, float y, float radius)
+        public virtual void Circle(float x, float y, float radius)
         {
             PVector transformedPosition = transformation.GetTransformedVector(x-radius, y-radius);
             drawCircleImpl(transformedPosition, radius);            
         }
 
-        public void Rect(float x, float y, float width, float heigth)
+        public virtual void Rect(float x, float y, float width, float heigth)
         {
             PVector transformedPosition = transformation.GetTransformedVector(x, y);
             drawRectImpl(transformedPosition, width, heigth);
             
         }
 
-        public void Square(float x, float y, float sideLength)
+        public virtual void Square(float x, float y, float sideLength)
         {
             PVector transformedPosition = transformation.GetTransformedVector(x, y);
             drawSquareImpl(transformedPosition, sideLength);            
         }
 
-        public void Ellipse(float x, float y, float width, float height)
+        public virtual void Ellipse(float x, float y, float width, float height)
         {
             PVector transformedPosition = transformation.GetTransformedVector(x-width, y-height);
             drawEllipseImpl(transformedPosition, width, height);
         }
-        public void Point(int x, int y)
+        public virtual void Point(int x, int y)
         {
             PVector transformedPosition = transformation.GetTransformedVector(x, y);
             drawPointImpl(transformedPosition);
         }
 
-        public void Line(float x1, float y1, float x2, float y2)
+        public virtual void Line(float x1, float y1, float x2, float y2)
         {
             PVector transformedP1 = transformation.GetTransformedVector(x1, y1);
             PVector transformedP2 = transformation.GetTransformedVector(x2, y2);
             drawLineImpl(transformedP1, transformedP2);            
         }
 
-        public void Background(float gray)
+        public virtual void Background(float gray)
         {
             backgroundColor.SetColor(gray);
             applyBackgoundColor(backgroundColor);
         }        
 
-        public void Background(float gray, byte alpha)
+        public virtual void Background(float gray, byte alpha)
         {
             backgroundColor.SetColor(gray, alpha);
             applyBackgoundColor(backgroundColor);
         }
 
-        public void Background(float v1, float v2, float v3)
+        public virtual void Background(float v1, float v2, float v3)
         {
             backgroundColor.SetColor(v1, v2, v3);
             applyBackgoundColor(backgroundColor);
         }
 
-        public void Background(float v1, float v2, float v3, byte alpha)
+        public virtual void Background(float v1, float v2, float v3, byte alpha)
         {
             backgroundColor.SetColor(v1, v2, v3, alpha);
             applyBackgoundColor(backgroundColor);
         }
 
-        public void BeginShape()
+        public virtual void BeginShape()
         {
             beginShapeImpl();
         }
 
-        public void Vertex(float x, float y)
+        public virtual void Vertex(float x, float y)
         {
             PVector position = transformation.GetTransformedVector(x, y);
             addVertexImpl(position);
         }
 
-        public void EndShape()
+        public virtual void EndShape()
         {
             endShapeImpl();
         }
@@ -251,23 +254,23 @@ namespace dotnetProcessing.Core
             return null;
         }
 
-        public void Translate(float x, float y, float z)
+        public virtual void Translate(float x, float y, float z)
         {
             transformation.Translate(x, y, z);
         }
 
-        public void Translate(float x, float y)
+        public virtual void Translate(float x, float y)
         {
             Translate(x, y, 0);
         }
 
-        public void Rotate(float angleInRadians)
+        public virtual void Rotate(float angleInRadians)
         {
             float newAngle = transformation.Angle + angleInRadians;
             transformation.SetAngle(newAngle);
         }
 
-        public void Pop()
+        public virtual void Pop()
         {
             PopMatrix();
             PopStyle();
@@ -283,7 +286,7 @@ namespace dotnetProcessing.Core
             
         }
 
-        public void Push()
+        public virtual void Push()
         {
             PushMatrix();
             PushStyle();
