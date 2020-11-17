@@ -609,8 +609,6 @@ namespace dotnetProcessing.SFML
             {
                 window.SetTitle(this.title);
             }
-            
-            
         }
 
         public void SetupExternalMessages()
@@ -636,14 +634,13 @@ namespace dotnetProcessing.SFML
             while (!isThreadStopped && window.IsOpen)
             {
                 window.DispatchEvents();
-                //graphicsSFML.BeginDraw();
                 internalSketch.HandleDraw();
                 if (refreshPending)
                 {
                     window.Display();
                     refreshPending = false;                    
                 }
-                //graphicsSFML.EndDraw();
+                
             }
 
         }
