@@ -115,10 +115,14 @@ namespace dotnetProcessing.Core
 
         public void HandleDraw()
         {   
-            graphics.BeginDraw();
-            Draw();
+            if (!isNoLoop)
+            {
+                graphics.BeginDraw();
+                Draw();                
+                graphics.EndDraw();
+            }
+
             dequeueEvents();
-            graphics.EndDraw();
         }
 
         public abstract void Setup();
