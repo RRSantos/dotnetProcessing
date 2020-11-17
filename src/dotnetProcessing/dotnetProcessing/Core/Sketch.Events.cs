@@ -7,6 +7,8 @@ namespace dotnetProcessing.Core
 {
     public abstract partial class Sketch
     {
+
+        private readonly Queue<BaseEvent> eventQueue = new Queue<BaseEvent>();
         
         protected const byte CENTER = PConstants.MOUSE_CENTER_BUTTON;
 
@@ -26,7 +28,7 @@ namespace dotnetProcessing.Core
         protected const int SHIFT = PConstants.SHIFT;
 
 
-        //protected const int BACKSPACE = PConstants.BACKSPACE;
+        
 
         protected bool isKeyPressed = false;
         protected char key = '\0';
@@ -38,6 +40,14 @@ namespace dotnetProcessing.Core
         protected int mouseY;
         protected int pmouseX;
         protected int pmouseY;
+
+        private void dequeueEvents()
+        {
+            while (eventQueue.TryDequeue(out BaseEvent evnt))
+            {
+                processEvent(evnt);
+            }
+        }
 
         private void processEvent(BaseEvent receivedEvent)
         {
@@ -124,7 +134,13 @@ namespace dotnetProcessing.Core
 
         public void PostEvent(BaseEvent receivedEvent)
         {
-            processEvent(receivedEvent);
+            eventQueue.Enqueue(receivedEvent);
+
+            if (isNoLoop)
+            {
+                dequeueEvents();
+            }
+            
         }
 
         

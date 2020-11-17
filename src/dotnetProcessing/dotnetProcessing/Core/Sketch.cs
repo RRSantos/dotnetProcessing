@@ -8,15 +8,15 @@ namespace dotnetProcessing.Core
     {   
 
         private readonly PGraphics graphics;
-        private readonly IPSurface surface;        
+        private readonly IPSurface surface;
 
         private readonly Random internalRandom = new Random();
 
         private PerlinNoise perlin = new PerlinNoise();
 
-        protected bool needsRefresh = false;
-        
-        
+        private bool isNoLoop = false;
+
+
         protected int width = IPSurface.MIN_WINDOW_WIDTH;
         protected int height = IPSurface.MIN_WINDOW_WIDTH;
         
@@ -86,17 +86,17 @@ namespace dotnetProcessing.Core
 
         protected void noLoop()
         {
-            //shouldDraw = false;
+            isNoLoop = true;
         }
 
         protected void loop()
         {
-            //shouldDraw = true;
+            isNoLoop = false;
         }
 
         protected void redraw()
         {
-            needsRefresh = true;
+            surface.RefreshNeeded();            
         }
 
 
@@ -111,6 +111,14 @@ namespace dotnetProcessing.Core
         public void Run()
         {
             surface.StartThread();
+        }
+
+        public void HandleDraw()
+        {   
+            graphics.BeginDraw();
+            Draw();
+            dequeueEvents();
+            graphics.EndDraw();
         }
 
         public abstract void Setup();

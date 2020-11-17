@@ -636,14 +636,14 @@ namespace dotnetProcessing.SFML
             while (!isThreadStopped && window.IsOpen)
             {
                 window.DispatchEvents();
-                graphicsSFML.BeginDraw();
-                internalSketch.Draw();
+                //graphicsSFML.BeginDraw();
+                internalSketch.HandleDraw();
                 if (refreshPending)
                 {
                     window.Display();
                     refreshPending = false;                    
                 }
-                graphicsSFML.EndDraw();
+                //graphicsSFML.EndDraw();
             }
 
         }

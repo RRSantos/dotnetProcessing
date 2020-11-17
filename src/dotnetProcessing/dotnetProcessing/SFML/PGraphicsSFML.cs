@@ -138,6 +138,7 @@ namespace dotnetProcessing.SFML
         {
             Color background = toColor(backgroundColor);
             window.Clear(background);
+            surface.RefreshNeeded();
         }
 
         public PGraphicsSFML()

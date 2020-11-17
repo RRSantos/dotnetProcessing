@@ -4,23 +4,14 @@ namespace dotnetProcessingManualTest
 {
     class EventsSketch : Sketch
     {
-        string tecla; 
+        string tecla;
+        byte red = 255;
+        byte green = 255;
+        byte blue = 255;
         public override void Draw()
         {
             title($"Última tecla pressionada: {tecla}");
-            if (keyCode == ALT)
-            {             
-                background(0, 0, 100);
-            }
-            else if (keyCode == CONTROL)
-            {
-             
-                background(0, 100, 0);
-            }
-            else if (keyCode == SHIFT)
-            {
-                background(100, 0, 0);
-            }
+            background(red, green, blue);            
         }
 
         protected override void keyPressed()
@@ -73,21 +64,27 @@ namespace dotnetProcessingManualTest
                 else if (keyCode == ALT)
                 {
                     tecla = "ALT";
-                    background(0, 0, 100);
+                    red = 120;
                 }
                 else if (keyCode == CONTROL)
                 {
                     tecla = "CONTROL";
-                    background(0, 100, 0);
+                    green = 120;
                 }
                 else if (keyCode == SHIFT)
                 {
                     tecla = "SHIFT";
-                    background(100, 0, 0);
+                    blue = 120;
                 }
             }
-
             
+        }
+
+        protected override void keyReleased()
+        {
+            red = 255;
+            green = 255;
+            blue = 255;
         }
 
         public override void Setup()
