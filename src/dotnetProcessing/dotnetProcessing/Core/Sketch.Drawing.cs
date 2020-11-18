@@ -124,5 +124,10 @@ namespace dotnetProcessing.Core
         {
             graphics.EndShape();
         }
+
+        protected void text(string newText, int x, int y)
+        {
+            graphics.Text(newText, x, y);
+        }
     }
 }

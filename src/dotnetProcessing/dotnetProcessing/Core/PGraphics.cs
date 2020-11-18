@@ -154,6 +154,12 @@ namespace dotnetProcessing.Core
         }
 
 
+        protected virtual void drawTextImpl(PVector position, string text)
+        {
+        }
+        
+
+
 
 
         public virtual void Circle(float x, float y, float radius)
@@ -300,6 +306,12 @@ namespace dotnetProcessing.Core
         public virtual void PushStyle()
         {
 
+        }
+
+        public virtual void Text(string text, int x, int y)
+        {
+            PVector transformedPosition = transformation.GetTransformedVector(x, y);
+            drawTextImpl(transformedPosition, text);
         }
 
 

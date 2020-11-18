@@ -198,5 +198,10 @@ namespace dotnetProcessing.Core
         {
             actionsBuffer.Add(graphics => graphics.PushStyle());
         }
+
+        public override void Text(string text, int x, int y)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(text, x, y));
+        }
     }
 }

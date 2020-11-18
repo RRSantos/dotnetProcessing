@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using SFML.Graphics;
+using  SFML.Graphics;
+using Text = SFML.Graphics.Text;
 using SFML.Window;
 using SFML.System;
 
@@ -11,6 +12,7 @@ namespace dotnetProcessing.SFML
 {
     class PGraphicsSFML:PGraphics
     {
+        private readonly Font defaultFont = new Font("C:/Windows/Fonts/Arial.ttf");
         private readonly Stack<Transformation> transformationStack = new Stack<Transformation>();
 
         private RenderWindow window;
@@ -161,6 +163,7 @@ namespace dotnetProcessing.SFML
             Width = width;
             Height = height;
             surface.SetSize(width, height);
+            
         }
 
         public override IPSurface GetSurface()
@@ -191,6 +194,18 @@ namespace dotnetProcessing.SFML
         public override void PushStyle()
         {
 
+        }
+
+        protected override void drawTextImpl(PVector position, string text)
+        {
+            
+            Text textObj = new Text(text, defaultFont);            
+            textObj.Position = toVector2f(position);
+            textObj.OutlineColor = toColor(strokeColor);
+            textObj.FillColor = toColor(fillColor);
+            textObj.Rotation = transformation.Angle;
+
+            window.Draw(textObj);
         }
 
 
