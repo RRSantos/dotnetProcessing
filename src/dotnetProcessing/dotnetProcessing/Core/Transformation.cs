@@ -10,9 +10,12 @@ namespace dotnetProcessing.Core
 
         private PVector getRotatedVector(PVector vector)
         {
+            if (vector.Z != 0)
+                throw new NotImplementedException("Z-axis transformations are not implemented yet.");
+
             float newX = (float)(vector.X * Math.Cos(Angle) - vector.Y * Math.Sin(Angle));
             float newY = (float)(vector.X * Math.Sin(Angle) + vector.Y * Math.Cos(Angle));
-
+            
             return new PVector(newX, newY);
         }
 
@@ -30,6 +33,16 @@ namespace dotnetProcessing.Core
         {
             PVector originalVector = new PVector(x, y);
             PVector rotatedVector = getRotatedVector(originalVector);           
+
+            rotatedVector.Add(origin);
+
+            return rotatedVector;
+        }
+
+        public PVector GetTransformedVector(float x, float y, float z)
+        {
+            PVector originalVector = new PVector(x, y, z);
+            PVector rotatedVector = getRotatedVector(originalVector);
 
             rotatedVector.Add(origin);
 

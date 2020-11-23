@@ -8,22 +8,60 @@ namespace dotnetProcessingManualTest
 {
     class SimpleSketch : Sketch
     {
+        char[] chars = new char[] { '0', '1', '2', '3', '4' };
         int counter = 0;
         bool looping = true;
         float internalAngle = 0;
         protected override void mouseClicked()
         {
-            looping = !looping;
-            if (looping)
-                loop();
-            else
-                noLoop();
+            //looping = !looping;
+            //if (looping)
+            //    loop();
+            //else
+            //    noLoop();
+            counter++;
         }
 
         public override void Draw()
         {
+            //oldDraw();
+            newDraw();
+        }
+
+        private void newDraw()
+        {
+            background(51);
+            int resto = counter % 5;
+            title($"Resto: {resto}");
+            fill(255, 0, 255);
+            stroke(190);
+            if (resto == 0)
+            {
+                text(chars, 0, chars.Length-1, mouseX, mouseY);
+            }
+            else if (resto == 1)
+            {
+                text(chars, 2, 4, mouseX, mouseY);
+            }
+            else if (resto == 2)
+            {
+                text('C',  mouseX, mouseY);
+            }
+            else if (resto == 3)
+            {
+                text("String", mouseX, mouseY);
+            }
+            else if (resto == 4)
+            {
+                text(12345, mouseX, mouseY);
+            }
+
+        }
+
+        private void oldDraw() 
+        {
             push();
-            translate(width/2, height/2);
+            translate(width / 2, height / 2);
             counter++;
             title($"A simple sketch. Counter: {counter}");
             background(0, 140, 0);
@@ -33,13 +71,8 @@ namespace dotnetProcessingManualTest
             pop();
             internalAngle += 0.01f;
             fill(100, 0, 255);
-            rotate((float)Math.PI/4);
+            rotate((float)Math.PI / 4);
             text("sou o dougras", mouseX, mouseY);
-            //text(internalAngle.ToString(), 0, 0);
-        }
-
-        private void testFont() 
-        {
             
         }
 

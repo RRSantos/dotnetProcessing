@@ -196,10 +196,12 @@ namespace dotnetProcessing.SFML
 
         }
 
-        protected override void drawTextImpl(PVector position, string text)
+        protected override void drawTextImpl(PVector position, char[] chars)
         {
+            string text = new string(chars);
             
             Text textObj = new Text(text, defaultFont);
+            
             textObj.Position = toVector2f(position);
             textObj.OutlineColor = toColor(strokeColor);
             textObj.FillColor = toColor(fillColor);

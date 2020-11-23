@@ -151,13 +151,12 @@ namespace dotnetProcessing.Core
 
         protected virtual void applyBackgoundColor(PColor backgroundColor)
         {
-        }
+        }        
 
-
-        protected virtual void drawTextImpl(PVector position, string text)
+        protected virtual void drawTextImpl(PVector position, char[] chars)
         {
         }
-        
+
 
 
 
@@ -308,11 +307,70 @@ namespace dotnetProcessing.Core
 
         }
 
-        public virtual void Text(string text, int x, int y)
+        public virtual void Text(char c, float x, float y)
         {
             PVector transformedPosition = transformation.GetTransformedVector(x, y);
-            drawTextImpl(transformedPosition, text);
+            drawTextImpl(transformedPosition, new char[] { c });
         }
+
+        public virtual void Text(char c, float x, float y, float z)
+        {
+            PVector transformedPosition = transformation.GetTransformedVector(x, y, z);
+            drawTextImpl(transformedPosition, new char[] { c });
+        }
+
+        public virtual void Text(string text, float x, float y)
+        {
+            PVector transformedPosition = transformation.GetTransformedVector(x, y);
+            drawTextImpl(transformedPosition, text.ToCharArray());
+        }
+
+        public virtual void Text(string text, float x, float y, float z)
+        {
+            PVector transformedPosition = transformation.GetTransformedVector(x, y, z);
+            drawTextImpl(transformedPosition, text.ToCharArray());
+        }
+
+        public virtual void Text(char[] chars, int start, int stop, float x, float y)
+        {
+            int copyLength = stop - start + 1;
+            char[] croppedArray = new char[chars.Length];
+            Array.Copy(chars, start, croppedArray, 0, copyLength);
+            Array.Resize<char>(ref croppedArray, copyLength);            
+
+            PVector transformedPosition = transformation.GetTransformedVector(x, y);
+            drawTextImpl(transformedPosition, croppedArray);
+        }
+
+        public virtual void Text(char[] chars, int start, int stop, float x, float y, float z)
+        {
+            int copyLength = stop - start + 1;
+            char[] croppedArray = new char[chars.Length];
+            Array.Copy(chars, croppedArray, copyLength);
+            Array.Resize<char>(ref croppedArray, copyLength);
+
+            PVector transformedPosition = transformation.GetTransformedVector(x, y, z);
+            drawTextImpl(transformedPosition, croppedArray);
+        }
+
+        public virtual void Text(string text, float x1, float y1, float x2, float y2)
+        {
+            throw new NotImplementedException("Not implemented.");            
+        }
+
+        public virtual void Text(int num, float x, float y)
+        {
+            PVector transformedPosition = transformation.GetTransformedVector(x, y);
+            drawTextImpl(transformedPosition, num.ToString().ToCharArray());
+        }
+
+        public virtual void Text(int num, float x, float y, float z)
+        {
+            PVector transformedPosition = transformation.GetTransformedVector(x, y, z);
+            drawTextImpl(transformedPosition, num.ToString().ToCharArray());
+        }
+
+
 
 
     }

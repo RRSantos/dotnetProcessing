@@ -199,9 +199,49 @@ namespace dotnetProcessing.Core
             actionsBuffer.Add(graphics => graphics.PushStyle());
         }
 
-        public override void Text(string text, int x, int y)
+        public override void Text(string text, float x, float y)
         {
             actionsBuffer.Add(graphics => graphics.Text(text, x, y));
+        }
+
+        public override void Text(string text, float x, float y, float z)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(text, x, y, z));
+        }
+
+        public override void Text(char c, float x, float y)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(c, x, y));
+        }
+
+        public override void Text(char c, float x, float y, float z)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(c, x, y, z));
+        }
+
+        public override void Text(char[] chars, int start, int stop, float x, float y)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(chars, start, stop, x, y));
+        }
+
+        public override void Text(char[] chars, int start, int stop, float x, float y, float z)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(chars, start, stop, x, y, z));
+        }
+
+        public override void Text(string text, float x1, float y1, float x2, float y2)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(text, x1, y1, x2, y2));
+        }
+
+        public override void Text(int num, float x, float y)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(num, x, y));
+        }
+
+        public override void Text(int num, float x, float y, float z)
+        {
+            actionsBuffer.Add(graphics => graphics.Text(num, x, y, z));
         }
     }
 }

@@ -125,9 +125,49 @@ namespace dotnetProcessing.Core
             graphics.EndShape();
         }
 
-        protected void text(string newText, int x, int y)
+        protected void text(string newText, float x, float y)
         {
             graphics.Text(newText, x, y);
+        }
+
+        protected void text(string newText, float x, float y, float z)
+        {
+            graphics.Text(newText, x, y, z);
+        }
+
+        protected void text(char c, float x, float y)
+        {
+            graphics.Text(c, x, y);
+        }
+
+        protected void text(char c, float x, float y, float z)
+        {
+            graphics.Text(c, x, y, z);
+        }
+
+        protected void text(char[] chars, int start, int stop, float x, float y)
+        {
+            graphics.Text(chars, start, stop, x, y);
+        }
+
+        protected void text(char[] chars, int start, int stop, float x, float y, float z)
+        {
+            graphics.Text(chars, start, stop, x, y, z);
+        }
+
+        protected void text(string text, float x1, float y1, float x2, float y2)
+        {
+            graphics.Text(text, x1, y1, x2, y2);
+        }
+
+        protected void text(int num, float x, float y, float z)
+        {
+            graphics.Text(num, x, y, z);
+        }
+
+        protected void text(int num, float x, float y)
+        {
+            graphics.Text(num, x, y);
         }
     }
 }
