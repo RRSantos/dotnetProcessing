@@ -11,8 +11,8 @@ using SFML.System;
 namespace dotnetProcessing.SFML
 {
     class PGraphicsSFML:PGraphics
-    {
-        private readonly Font defaultFont = new Font("C:/Windows/Fonts/Arial.ttf");
+    {   
+        private readonly Font defaultFont = new Font("fonts/Roboto-Regular.ttf");
         private readonly Stack<Transformation> transformationStack = new Stack<Transformation>();
 
         private RenderWindow window;
@@ -199,11 +199,11 @@ namespace dotnetProcessing.SFML
         protected override void drawTextImpl(PVector position, string text)
         {
             
-            Text textObj = new Text(text, defaultFont);            
+            Text textObj = new Text(text, defaultFont);
             textObj.Position = toVector2f(position);
             textObj.OutlineColor = toColor(strokeColor);
             textObj.FillColor = toColor(fillColor);
-            textObj.Rotation = transformation.Angle;
+            textObj.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
 
             window.Draw(textObj);
         }

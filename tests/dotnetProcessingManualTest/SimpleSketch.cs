@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace dotnetProcessingManualTest
 {
     class SimpleSketch : Sketch
@@ -18,20 +19,32 @@ namespace dotnetProcessingManualTest
             else
                 noLoop();
         }
-        
+
         public override void Draw()
         {
+            push();
+            translate(width/2, height/2);
             counter++;
             title($"A simple sketch. Counter: {counter}");
             background(0, 140, 0);
             fill(100);
             stroke(190);
-            rect(10+ counter, 10, 30, 40);
-            internalAngle += 0.1f;
-            //rotate(internalAngle);
-            fill(100,0,255);
-            text(internalAngle.ToString(), 100, 100);
+            rect(counter, -50, 30, 40);
+            pop();
+            internalAngle += 0.01f;
+            fill(100, 0, 255);
+            rotate((float)Math.PI/4);
+            text("sou o dougras", mouseX, mouseY);
+            //text(internalAngle.ToString(), 0, 0);
         }
+
+        private void testFont() 
+        {
+            
+        }
+
+
+
 
         public override void Setup()
         {
