@@ -174,5 +174,25 @@ namespace dotnetProcessing.Core
         {
             graphics.TextSize(size);
         }
+
+        protected void textAlign(byte horizontalAlignment)
+        {
+            graphics.TextAlign(horizontalAlignment);
+        }
+
+        protected void textAlign(byte horizontalAlignment, byte verticalAlignment)
+        {
+            graphics.TextAlign(horizontalAlignment, verticalAlignment);
+        }
+
+        protected float textWidth(char c)
+        {
+            return graphics.TextWidth(c);
+        }
+
+        protected float textWidth(string text)
+        {
+            return graphics.TextWidth(text);
+        }
     }
 }

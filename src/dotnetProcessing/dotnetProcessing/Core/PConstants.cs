@@ -8,8 +8,11 @@ namespace dotnetProcessing.Core
     {
         public const byte MOUSE_LEFT_BUTTON = LEFT;
         public const byte MOUSE_RIGHT_BUTTON = RIGHT;
-        public const byte MOUSE_CENTER_BUTTON = 3;
+        public const byte MOUSE_CENTER_BUTTON = CENTER;
 
+        public const byte CENTER = 3;
+        public const byte TOP = 4;
+        public const byte BOTTOM = 5;
 
         public const char BACKSPACE = (char)8;
         public const char TAB = (char)9;
@@ -24,6 +27,7 @@ namespace dotnetProcessing.Core
         public const int DOWN = (int)ConsoleKey.DownArrow;
         public const int LEFT = (int)ConsoleKey.LeftArrow;
         public const int RIGHT = (int)ConsoleKey.RightArrow;
+        
 
         public const int ALT = 18;
         public const int CONTROL = 17;

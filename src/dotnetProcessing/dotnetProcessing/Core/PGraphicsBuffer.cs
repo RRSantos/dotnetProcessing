@@ -243,5 +243,16 @@ namespace dotnetProcessing.Core
         {
             actionsBuffer.Add(graphics => graphics.Text(num, x, y, z));
         }
+
+        public override void TextAlign(int horizontalAlign)
+        {
+            actionsBuffer.Add(graphics => graphics.TextAlign(horizontalAlign));
+        }
+
+        public override void TextAlign(int horizontalAlign, int verticalAlign)
+        {
+            actionsBuffer.Add(graphics => graphics.TextAlign(horizontalAlign, verticalAlign));
+        }
+
     }
 }

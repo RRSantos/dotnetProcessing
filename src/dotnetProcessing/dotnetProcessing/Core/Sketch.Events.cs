@@ -10,7 +10,9 @@ namespace dotnetProcessing.Core
 
         private readonly Queue<BaseEvent> eventQueue = new Queue<BaseEvent>();
         
-        protected const byte CENTER = PConstants.MOUSE_CENTER_BUTTON;
+        protected const byte CENTER = PConstants.CENTER;
+        protected const byte TOP = PConstants.TOP;
+        protected const byte BOTTOM = PConstants.BOTTOM;
 
         protected const char CODED = PConstants.CODED;
         protected const char BACKSPACE = PConstants.BACKSPACE;

@@ -21,7 +21,7 @@ namespace dotnetProcessingManualTest
             clearActualLine();
             background(51);
             computeNextState();
-            render();
+            render2();
             
             title($"rule number:{ruleNumber}");
         }
@@ -82,7 +82,7 @@ namespace dotnetProcessingManualTest
             }            
         }
 
-        private void render()
+        private void render2()
         {
             translate(0, height- cellSize);
             stroke(130);

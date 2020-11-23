@@ -10,7 +10,12 @@ namespace dotnetProcessing.Core
         protected PColor strokeColor;
         protected bool hasStroke = true;
         protected float strokeWeight = 1.0f;
+        
+        
+        protected const string defaultFontLocation = "fonts/Roboto-Regular.ttf";
         protected float textSize = 10f;
+        protected int textHorizontalAlign = PConstants.LEFT;
+        protected int textVerticalAlign = PConstants.BOTTOM;
 
 
         protected PColor fillColor;
@@ -157,6 +162,13 @@ namespace dotnetProcessing.Core
         protected virtual void drawTextImpl(PVector position, char[] chars)
         {
         }
+
+        protected virtual float getTextWidthImpl(char[] chars)
+        {
+            return 0;
+        }
+
+        
 
 
 
@@ -374,6 +386,29 @@ namespace dotnetProcessing.Core
         public virtual void TextSize(float size)
         {
             textSize = size;
+        }
+
+        public virtual void TextAlign(int horizontalAlign)
+        {
+            textHorizontalAlign = horizontalAlign;
+        }
+
+        public virtual void TextAlign(int horizontalAlign, int verticalAlign)
+        {
+            textHorizontalAlign = horizontalAlign;
+            textVerticalAlign = verticalAlign;
+        }
+
+        public virtual float TextWidth(char c)
+        {
+            float textWidth = getTextWidthImpl(new char[] { c });
+            return textWidth;
+        }
+
+        public virtual float TextWidth(string text)
+        {
+            float textWidth = getTextWidthImpl(text.ToCharArray());
+            return textWidth;
         }
 
 

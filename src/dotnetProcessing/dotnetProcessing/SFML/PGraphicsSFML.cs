@@ -11,8 +11,8 @@ using SFML.System;
 namespace dotnetProcessing.SFML
 {
     class PGraphicsSFML:PGraphics
-    {   
-        private readonly Font defaultFont = new Font("fonts/Roboto-Regular.ttf");
+    {
+        protected readonly Font defaultFont = new Font(defaultFontLocation);
         private readonly Stack<Transformation> transformationStack = new Stack<Transformation>();
 
         private RenderWindow window;
@@ -43,27 +43,55 @@ namespace dotnetProcessing.SFML
             return circleShape;
         }
 
+        private Vector2f  getTextOrigin(FloatRect textRect)
+        {
+            float x = 0;
+            float y = 0;
+            
+            if (textHorizontalAlign == PConstants.CENTER)
+            {
+                x = textRect.Width/2 ;
+            }
+            else if (textHorizontalAlign == PConstants.RIGHT)
+            {
+                x = textRect.Width;
+            }
+
+            if (textVerticalAlign == PConstants.CENTER)
+            {
+                y = textRect.Height/2;
+            }
+            else if (textVerticalAlign == PConstants.TOP)
+            {
+                y = textRect.Height;
+            }
+
+            return new Vector2f(x, y);
+        }
+
         protected override void drawCircleImpl(PVector position, float radius)
         {
-            Shape circle = createCircleShape(radius);
-            circle.Position = toVector2f(position);
-            window.Draw(circle);
+            using (Shape circle = createCircleShape(radius))
+            {
+                circle.Position = toVector2f(position);
+                window.Draw(circle);
+            }                
             surface.RefreshNeeded();
         }
         
 
         protected override void drawRectImpl(PVector position, float width, float heigth)
         {
-            RectangleShape rectangle = new RectangleShape(new Vector2f(width, heigth))
+            using (RectangleShape rectangle = new RectangleShape(new Vector2f(width, heigth)))
             {
-                Position = toVector2f(position),
-                FillColor = toColor(fillColor),
-                OutlineThickness = strokeWeight,
-                OutlineColor = toColor(strokeColor),
-                Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle)
-            };
-
-            window.Draw(rectangle);
+                rectangle.Position = toVector2f(position);
+                rectangle.FillColor = toColor(fillColor);
+                rectangle.OutlineThickness = strokeWeight;
+                rectangle.OutlineColor = toColor(strokeColor);
+                rectangle.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
+                window.Draw(rectangle);
+            }
+            
             surface.RefreshNeeded();
         }
 
@@ -74,10 +102,12 @@ namespace dotnetProcessing.SFML
 
         protected override void drawEllipseImpl(PVector position, float width, float height)
         {
-            Shape ellipse = createCircleShape(width);
-            ellipse.Position = toVector2f(position);
-            ellipse.Scale = new Vector2f(1, height / width);
-            window.Draw(ellipse);
+            using (Shape ellipse = createCircleShape(width))
+            {
+                ellipse.Position = toVector2f(position);
+                ellipse.Scale = new Vector2f(1, height / width);
+                window.Draw(ellipse);
+            }   
             surface.RefreshNeeded();
         }
 
@@ -94,15 +124,15 @@ namespace dotnetProcessing.SFML
             }
             else
             {
-                CircleShape circleShape = new CircleShape(strokeWeight * 0.5f)
+                using (CircleShape circleShape = new CircleShape(strokeWeight * 0.5f))
                 {
-                    FillColor = toColor(strokeColor),
-                    OutlineThickness = 0
+                    circleShape.FillColor = toColor(strokeColor);
+                    circleShape.OutlineThickness = 0;
+                    circleShape.Position = toVector2f(position);
+                    window.Draw(circleShape);
                 };
-                
-                circleShape.Position = toVector2f(position);
-                window.Draw(circleShape);
             }
+            
             surface.RefreshNeeded();
         }
 
@@ -133,14 +163,50 @@ namespace dotnetProcessing.SFML
         protected override void addVertexImpl(PVector position)
         {   
             Vector2f shapePoint = toVector2f(position);
-            shapePoints.Append(new Vertex(shapePoint, toColor(strokeColor)));
+            shapePoints.Append(new Vertex(shapePoint, toColor(strokeColor)));            
         }
 
         protected override void applyBackgoundColor(PColor backgroundColor)
         {
-            Color background = toColor(backgroundColor);
+            Color background = toColor(backgroundColor);            
             window.Clear(background);
             surface.RefreshNeeded();
+        }
+
+        private Text createText(PVector position, char[] chars)
+        {
+            string text = new string(chars);
+
+            Text textObj = new Text(text, defaultFont);
+
+            textObj.Position = toVector2f(position);
+            textObj.OutlineColor = toColor(strokeColor);
+            textObj.OutlineThickness = strokeWeight;
+            textObj.FillColor = toColor(fillColor);
+            textObj.CharacterSize = (uint)textSize;
+            textObj.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
+
+            FloatRect textBox = textObj.GetLocalBounds();
+            textObj.Origin = getTextOrigin(textBox);
+
+            return textObj;
+        }
+
+        protected override void drawTextImpl(PVector position, char[] chars)
+        {
+
+            using (Text textObj = createText(position, chars))
+            {
+                window.Draw(textObj);
+            }
+        }
+
+        protected override float getTextWidthImpl(char[] chars)
+        {
+            using (Text textObj = createText(new PVector(), chars))
+            {
+                return textObj.GetLocalBounds().Width;                
+            }
         }
 
         public PGraphicsSFML()
@@ -194,22 +260,7 @@ namespace dotnetProcessing.SFML
         public override void PushStyle()
         {
 
-        }
-
-        protected override void drawTextImpl(PVector position, char[] chars)
-        {
-            string text = new string(chars);
-            
-            Text textObj = new Text(text, defaultFont);
-            
-            textObj.Position = toVector2f(position);
-            textObj.OutlineColor = toColor(strokeColor);
-            textObj.FillColor = toColor(fillColor);
-            textObj.CharacterSize = (uint)textSize;
-            textObj.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
-
-            window.Draw(textObj);
-        }
+        }       
 
 
     }
