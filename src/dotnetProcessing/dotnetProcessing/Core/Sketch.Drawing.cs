@@ -194,5 +194,10 @@ namespace dotnetProcessing.Core
         {
             return graphics.TextWidth(text);
         }
+
+        protected void textLeading(float textLeading)
+        {
+            graphics.TextLeading(textLeading);
+        }
     }
 }

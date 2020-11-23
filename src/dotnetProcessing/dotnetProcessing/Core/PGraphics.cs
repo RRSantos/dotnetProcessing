@@ -16,6 +16,7 @@ namespace dotnetProcessing.Core
         protected float textSize = 10f;
         protected int textHorizontalAlign = PConstants.LEFT;
         protected int textVerticalAlign = PConstants.BOTTOM;
+        protected float textLeading = 10f;
 
 
         protected PColor fillColor;
@@ -386,6 +387,7 @@ namespace dotnetProcessing.Core
         public virtual void TextSize(float size)
         {
             textSize = size;
+            textLeading = size;
         }
 
         public virtual void TextAlign(int horizontalAlign)
@@ -409,6 +411,11 @@ namespace dotnetProcessing.Core
         {
             float textWidth = getTextWidthImpl(text.ToCharArray());
             return textWidth;
+        }
+
+        public virtual void TextLeading(float textLeading)
+        {
+            this.textLeading = textLeading;
         }
 
 

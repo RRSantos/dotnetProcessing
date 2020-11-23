@@ -28,7 +28,6 @@ namespace dotnetProcessingManualTest
         private void newDraw2()
         {
             background(51);
-            translate(width / 2, height / 2);
 
             int resto = counter % 9;
 
@@ -72,7 +71,7 @@ namespace dotnetProcessingManualTest
 
             fill(255, 0, 255);
             stroke(200,0,0);
-            //rotate(textAngle);
+            
             textSize(20);
             strokeWeight(1);
             text($"Meu texgq,!ÃÉ. {resto}", 5, 5);
@@ -84,6 +83,23 @@ namespace dotnetProcessingManualTest
             stroke(0, 255, 10);
             line(10, 100, 10, 140);
             line(10+ textWidth(meutexto), 100, 10+ textWidth(meutexto), 140);
+
+
+            String lines = "L1\nL2\nL3";
+            textSize(12);
+            fill(0);  
+
+            textLeading(10);  // Set leading to 10
+            text(lines, 100, 200);
+
+            textLeading(20);  // Set leading to 20
+            text(lines, 150, 200);
+
+            textLeading(30);  // Set leading to 30
+            text(lines, 200, 200);
+
+            textSize(15);
+            text(lines, 250, 200);
 
 
 

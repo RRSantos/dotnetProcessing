@@ -254,5 +254,10 @@ namespace dotnetProcessing.Core
             actionsBuffer.Add(graphics => graphics.TextAlign(horizontalAlign, verticalAlign));
         }
 
+        public override void TextLeading(float textLeading)
+        {
+            actionsBuffer.Add(graphics => graphics.TextLeading(textLeading));
+        }
+
     }
 }

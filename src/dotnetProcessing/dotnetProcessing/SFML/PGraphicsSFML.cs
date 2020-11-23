@@ -184,6 +184,7 @@ namespace dotnetProcessing.SFML
             textObj.OutlineThickness = strokeWeight;
             textObj.FillColor = toColor(fillColor);
             textObj.CharacterSize = (uint)textSize;
+            textObj.LineSpacing = textLeading/textSize;
             textObj.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
 
             FloatRect textBox = textObj.GetLocalBounds();
