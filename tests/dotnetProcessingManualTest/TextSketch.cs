@@ -20,9 +20,91 @@ namespace dotnetProcessingManualTest
         }
 
         public override void Draw()
-        {   
+        {
             //newDraw();
-            newDraw2();
+            //newDraw2();
+            newDraw3();
+        }
+
+        private void newDraw3()
+        {
+            background(51);
+
+            stroke(180);
+            fill(200, 0, 100);
+            
+            textSize(16);
+            textAlign(RIGHT);
+            text("ABCD", 50, 10);
+            textAlign(CENTER);
+            text("EFGH", 50, 30);
+            textAlign(LEFT);
+            text("IJKL", 50, 50);
+
+
+            fill(100, 0, 200);
+            stroke(100, 0, 200);
+            textSize(20);
+            textAlign(LEFT, BOTTOM);
+            line(0, 100, width, 100);
+            text("LEFT,BOTTOM", 50, 100);
+            textAlign(LEFT, CENTER);
+            line(0, 150, width, 150);
+            text("LEFT,CENTER", 50, 150);
+            textAlign(LEFT, TOP);
+            line(0, 170, width, 170);
+            text("LEFT,TOP", 50, 170);
+
+
+            String lines = "L1\nL2\nL3";
+            textSize(12);
+            fill(0);
+
+            textLeading(10);  // Set leading to 10
+            text(lines, 100, 200);
+
+            textLeading(20);  // Set leading to 20
+            text(lines, 150, 200);
+
+            textLeading(30);  // Set leading to 30
+            text(lines, 200, 200);
+
+            textSize(15);
+            text(lines, 250, 200);
+
+            
+            float wbase = height * 0.75f;
+            float scalar = 1f; // Different for each font
+
+            textAlign(LEFT, BOTTOM);
+            textSize(32);  // Set initial text size
+            float a = textAscent() * scalar;  // Calc ascent
+            stroke(0, 0, 255);
+            line(0, wbase - a, width, wbase - a);
+            text("Tdp1É", 0, wbase);  // Draw text on baseline
+
+            textAlign(LEFT, CENTER);
+            //textSize(64);  // Increase text size
+            a = textAscent() * scalar;  // Recalc ascent
+            stroke(255, 0, 0);
+            line(150, wbase - a, width, wbase - a);
+            text("tdp2É", 150, wbase);  // Draw text on baseline
+
+
+            textAlign(LEFT, TOP);
+            //textSize(64);  // Increase text size
+            a = textAscent() * scalar;  // Recalc ascent
+            stroke(0, 255, 0);
+            line(300, wbase - a, width, wbase - a);
+            text("tdp3É", 300, wbase);  // Draw text on baseline
+
+
+            textAlign(LEFT, BOTTOM);
+            textSize(64);  // Increase text size
+            a = textDescent() * scalar;  // Recalc ascent
+            stroke(255, 0, 255);
+            line(400, wbase - a, width, wbase - a);
+            text("tdp64", 400, wbase);  // Draw text on baseline
         }
 
         private void newDraw2()
@@ -85,21 +167,7 @@ namespace dotnetProcessingManualTest
             line(10+ textWidth(meutexto), 100, 10+ textWidth(meutexto), 140);
 
 
-            String lines = "L1\nL2\nL3";
-            textSize(12);
-            fill(0);  
-
-            textLeading(10);  // Set leading to 10
-            text(lines, 100, 200);
-
-            textLeading(20);  // Set leading to 20
-            text(lines, 150, 200);
-
-            textLeading(30);  // Set leading to 30
-            text(lines, 200, 200);
-
-            textSize(15);
-            text(lines, 250, 200);
+            
 
 
 

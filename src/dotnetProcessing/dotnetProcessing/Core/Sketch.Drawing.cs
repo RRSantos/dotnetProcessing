@@ -199,5 +199,16 @@ namespace dotnetProcessing.Core
         {
             graphics.TextLeading(textLeading);
         }
+
+        protected float textAscent()
+        {
+            return graphics.TextAscent();
+        }
+
+        protected float textDescent()
+        {
+            return graphics.TextDescent();
+        }
+
     }
 }

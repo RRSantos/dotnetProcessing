@@ -61,12 +61,32 @@ namespace dotnetProcessing.SFML
             {
                 y = textRect.Height/2;
             }
-            else if (textVerticalAlign == PConstants.TOP)
+            else if (textVerticalAlign == PConstants.BOTTOM)
             {
                 y = textRect.Height;
             }
 
             return new Vector2f(x, y);
+        }
+
+        private Text createText(PVector position, char[] chars)
+        {
+            string text = new string(chars);
+
+            Text textObj = new Text(text, defaultFont);
+
+            textObj.Position = toVector2f(position);
+            textObj.OutlineColor = toColor(strokeColor);
+            textObj.OutlineThickness = strokeWeight;
+            textObj.FillColor = toColor(fillColor);
+            textObj.CharacterSize = (uint)textSize;
+            textObj.LineSpacing = textLeading / textSize;
+            textObj.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
+
+            FloatRect textBox = textObj.GetLocalBounds();
+            textObj.Origin = getTextOrigin(textBox);
+
+            return textObj;
         }
 
         protected override void drawCircleImpl(PVector position, float radius)
@@ -171,26 +191,25 @@ namespace dotnetProcessing.SFML
             Color background = toColor(backgroundColor);            
             window.Clear(background);
             surface.RefreshNeeded();
+        }        
+
+        protected override float getTextAscentImpl()
+        {
+            using (Text textObj = createText(new PVector(), new char[] { 'T'}))
+            {
+                var textBox = textObj.GetLocalBounds();
+
+                return textBox.Height;
+            }
         }
 
-        private Text createText(PVector position, char[] chars)
+        protected override float getTextDescentImpl()
         {
-            string text = new string(chars);
-
-            Text textObj = new Text(text, defaultFont);
-
-            textObj.Position = toVector2f(position);
-            textObj.OutlineColor = toColor(strokeColor);
-            textObj.OutlineThickness = strokeWeight;
-            textObj.FillColor = toColor(fillColor);
-            textObj.CharacterSize = (uint)textSize;
-            textObj.LineSpacing = textLeading/textSize;
-            textObj.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
-
-            FloatRect textBox = textObj.GetLocalBounds();
-            textObj.Origin = getTextOrigin(textBox);
-
-            return textObj;
+            using (Text textObj = createText(new PVector(), new char[] { 'q' }))
+            {
+                var textBox = textObj.GetLocalBounds();
+                return textBox.Height;
+            }
         }
 
         protected override void drawTextImpl(PVector position, char[] chars)

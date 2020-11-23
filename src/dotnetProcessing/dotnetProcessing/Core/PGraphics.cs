@@ -169,7 +169,19 @@ namespace dotnetProcessing.Core
             return 0;
         }
 
-        
+        protected virtual float getTextAscentImpl()
+        {
+            return 0;
+        }
+
+        protected virtual float getTextDescentImpl()
+        {
+            return 0;
+        }
+
+
+
+
 
 
 
@@ -393,6 +405,7 @@ namespace dotnetProcessing.Core
         public virtual void TextAlign(int horizontalAlign)
         {
             textHorizontalAlign = horizontalAlign;
+            textVerticalAlign = PConstants.BOTTOM;
         }
 
         public virtual void TextAlign(int horizontalAlign, int verticalAlign)
@@ -416,6 +429,16 @@ namespace dotnetProcessing.Core
         public virtual void TextLeading(float textLeading)
         {
             this.textLeading = textLeading;
+        }
+
+        public virtual float TextAscent()
+        {
+            return getTextAscentImpl();
+        }
+
+        public virtual float TextDescent()
+        {
+            return getTextDescentImpl();
         }
 
 

@@ -13,6 +13,8 @@ namespace dotnetProcessing.Core
         protected const byte CENTER = PConstants.CENTER;
         protected const byte TOP = PConstants.TOP;
         protected const byte BOTTOM = PConstants.BOTTOM;
+        protected const byte BASELINE = PConstants.BASELINE;
+        
 
         protected const char CODED = PConstants.CODED;
         protected const char BACKSPACE = PConstants.BACKSPACE;

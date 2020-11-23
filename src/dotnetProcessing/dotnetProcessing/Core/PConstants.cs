@@ -13,6 +13,7 @@ namespace dotnetProcessing.Core
         public const byte CENTER = 3;
         public const byte TOP = 4;
         public const byte BOTTOM = 5;
+        public const byte BASELINE = 6;
 
         public const char BACKSPACE = (char)8;
         public const char TAB = (char)9;
