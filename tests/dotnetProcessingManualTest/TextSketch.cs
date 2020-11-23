@@ -6,31 +6,26 @@ using System.Text;
 
 namespace dotnetProcessingManualTest
 {
-    class SimpleSketch : Sketch
+    class TextSketch : Sketch
     {
         char[] chars = new char[] { '0', '1', '2', '3', '4' };
         int counter = 0;
-        bool looping = true;
-        float internalAngle = 0;
+        float internalTextSize = 10;
         protected override void mouseClicked()
-        {
-            //looping = !looping;
-            //if (looping)
-            //    loop();
-            //else
-            //    noLoop();
+        {   
             counter++;
+            internalTextSize += 5;
         }
 
         public override void Draw()
-        {
-            //oldDraw();
+        {   
             newDraw();
         }
 
         private void newDraw()
         {
             background(51);
+            textSize(internalTextSize);
             int resto = counter % 5;
             title($"Resto: {resto}");
             fill(255, 0, 255);
@@ -58,34 +53,9 @@ namespace dotnetProcessingManualTest
 
         }
 
-        private void oldDraw() 
-        {
-            push();
-            translate(width / 2, height / 2);
-            counter++;
-            title($"A simple sketch. Counter: {counter}");
-            background(0, 140, 0);
-            fill(100);
-            stroke(190);
-            rect(counter, -50, 30, 40);
-            pop();
-            internalAngle += 0.01f;
-            fill(100, 0, 255);
-            rotate((float)Math.PI / 4);
-            text("sou o dougras", mouseX, mouseY);
-            
-        }
-
-
-
-
         public override void Setup()
         {
-            size(500, 500);
-            //title("A simple sketch");
-            //background(255,0,255);
-            //fill(255, 0 , 0);
-            //rect(10, 10, 30, 40);
+            size(500, 500);         
         }
     }
 }

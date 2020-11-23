@@ -80,7 +80,7 @@ namespace dotnetProcessingManualTest
             avaliableOptions.Add("Perlin noise");
             avaliableOptions.Add("Phyllotaxis");
             avaliableOptions.Add("Random walker");
-            avaliableOptions.Add("Simple sketch");
+            avaliableOptions.Add("Text sketch");
             avaliableOptions.Add("Events sketch");
 
         }
@@ -113,7 +113,7 @@ namespace dotnetProcessingManualTest
                 case 9:
                     return new RandomWalkerSketch();
                 case 10:
-                    return new SimpleSketch();
+                    return new TextSketch();
                 case 11:
                     return new EventsSketch();
                 default:

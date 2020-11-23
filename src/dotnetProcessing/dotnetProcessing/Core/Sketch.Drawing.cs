@@ -169,5 +169,10 @@ namespace dotnetProcessing.Core
         {
             graphics.Text(num, x, y);
         }
+
+        protected void textSize(float size)
+        {
+            graphics.TextSize(size);
+        }
     }
 }

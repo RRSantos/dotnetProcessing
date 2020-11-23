@@ -205,6 +205,7 @@ namespace dotnetProcessing.SFML
             textObj.Position = toVector2f(position);
             textObj.OutlineColor = toColor(strokeColor);
             textObj.FillColor = toColor(fillColor);
+            textObj.CharacterSize = (uint)textSize;
             textObj.Rotation = Helpers.ConvertionHelper.RadiansToDegrees(transformation.Angle);
 
             window.Draw(textObj);

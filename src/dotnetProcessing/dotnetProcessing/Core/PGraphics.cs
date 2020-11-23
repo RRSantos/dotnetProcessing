@@ -10,6 +10,7 @@ namespace dotnetProcessing.Core
         protected PColor strokeColor;
         protected bool hasStroke = true;
         protected float strokeWeight = 1.0f;
+        protected float textSize = 10f;
 
 
         protected PColor fillColor;
@@ -368,6 +369,11 @@ namespace dotnetProcessing.Core
         {
             PVector transformedPosition = transformation.GetTransformedVector(x, y, z);
             drawTextImpl(transformedPosition, num.ToString().ToCharArray());
+        }
+
+        public virtual void TextSize(float size)
+        {
+            textSize = size;
         }
 
 
