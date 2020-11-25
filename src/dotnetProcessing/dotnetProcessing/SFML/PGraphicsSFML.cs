@@ -12,7 +12,7 @@ namespace dotnetProcessing.SFML
 {
     class PGraphicsSFML:PGraphics
     {
-        //protected readonly Font defaultFont = new Font(defaultFontLocation);
+        protected readonly Font defaultFont = new Font(defaultFontLocation);
         private readonly Stack<Transformation> transformationStack = new Stack<Transformation>();
 
         private RenderWindow window;
@@ -72,10 +72,8 @@ namespace dotnetProcessing.SFML
         private Text createText(PVector position, char[] chars)
         {
             string text = new string(chars);
-            //currentFont.Font
             
-            Font font = toSFMLFont(currentFont);
-            Text textObj = new Text(text, font);
+            Text textObj = new Text(text, defaultFont);
 
             textObj.Position = toVector2f(position);
             textObj.OutlineColor = toColor(strokeColor);
@@ -89,13 +87,6 @@ namespace dotnetProcessing.SFML
             textObj.Origin = getTextOrigin(textBox);
 
             return textObj;
-        }
-
-        private Font toSFMLFont(PFont currentFont)
-        {
-            return null;
-            //currentFont.Font.FontFamily.
-            //Font a = new Font()
         }
 
         protected override void drawCircleImpl(PVector position, float radius)
