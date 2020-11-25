@@ -13,6 +13,7 @@ namespace dotnetProcessing.Core
         
         
         protected const string defaultFontLocation = "fonts/Roboto-Regular.ttf";
+        protected PFont currentFont;
         protected float textSize = 10f;
         protected int textHorizontalAlign = PConstants.LEFT;
         protected int textVerticalAlign = PConstants.BOTTOM;
@@ -31,6 +32,7 @@ namespace dotnetProcessing.Core
 
         public PGraphics()
         {
+            currentFont = PFont.GetSystemDeafultFont();
             strokeColor = new PColor();
             fillColor = new PColor();
             backgroundColor = new PColor();
@@ -168,24 +170,6 @@ namespace dotnetProcessing.Core
         {
             return 0;
         }
-
-        protected virtual float getTextAscentImpl()
-        {
-            return 0;
-        }
-
-        protected virtual float getTextDescentImpl()
-        {
-            return 0;
-        }
-
-
-
-
-
-
-
-
 
         public virtual void Circle(float x, float y, float radius)
         {
@@ -433,12 +417,12 @@ namespace dotnetProcessing.Core
 
         public virtual float TextAscent()
         {
-            return getTextAscentImpl();
+            return currentFont.Ascent;
         }
 
         public virtual float TextDescent()
         {
-            return getTextDescentImpl();
+            return currentFont.Descent;
         }
 
 

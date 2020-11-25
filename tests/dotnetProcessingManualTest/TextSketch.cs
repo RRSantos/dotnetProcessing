@@ -104,7 +104,7 @@ namespace dotnetProcessingManualTest
             a = textDescent() * scalar;  // Recalc ascent
             stroke(255, 0, 255);
             line(400, wbase - a, width, wbase - a);
-            text("tdp64", 400, wbase);  // Draw text on baseline
+            text("tdp64", 400, wbase);  // Draw text on baseline            
         }
 
         private void newDraw2()

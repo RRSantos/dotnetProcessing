@@ -12,7 +12,7 @@ namespace dotnetProcessing.SFML
 {
     class PGraphicsSFML:PGraphics
     {
-        protected readonly Font defaultFont = new Font(defaultFontLocation);
+        //protected readonly Font defaultFont = new Font(defaultFontLocation);
         private readonly Stack<Transformation> transformationStack = new Stack<Transformation>();
 
         private RenderWindow window;
@@ -72,8 +72,10 @@ namespace dotnetProcessing.SFML
         private Text createText(PVector position, char[] chars)
         {
             string text = new string(chars);
-
-            Text textObj = new Text(text, defaultFont);
+            //currentFont.Font
+            
+            Font font = toSFMLFont(currentFont);
+            Text textObj = new Text(text, font);
 
             textObj.Position = toVector2f(position);
             textObj.OutlineColor = toColor(strokeColor);
@@ -87,6 +89,13 @@ namespace dotnetProcessing.SFML
             textObj.Origin = getTextOrigin(textBox);
 
             return textObj;
+        }
+
+        private Font toSFMLFont(PFont currentFont)
+        {
+            return null;
+            //currentFont.Font.FontFamily.
+            //Font a = new Font()
         }
 
         protected override void drawCircleImpl(PVector position, float radius)
@@ -191,25 +200,6 @@ namespace dotnetProcessing.SFML
             Color background = toColor(backgroundColor);            
             window.Clear(background);
             surface.RefreshNeeded();
-        }        
-
-        protected override float getTextAscentImpl()
-        {
-            using (Text textObj = createText(new PVector(), new char[] { 'T'}))
-            {
-                var textBox = textObj.GetLocalBounds();
-
-                return textBox.Height;
-            }
-        }
-
-        protected override float getTextDescentImpl()
-        {
-            using (Text textObj = createText(new PVector(), new char[] { 'q' }))
-            {
-                var textBox = textObj.GetLocalBounds();
-                return textBox.Height;
-            }
         }
 
         protected override void drawTextImpl(PVector position, char[] chars)
