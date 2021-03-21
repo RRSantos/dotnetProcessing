@@ -13,6 +13,8 @@ namespace dotnetProcessingManualTest
         int counter = 0;
         float internalTextSize = 10;
         float textAngle = 0f;
+
+        List<string> myfonts;
         protected override void mouseClicked()
         {   
             counter++;
@@ -23,12 +25,33 @@ namespace dotnetProcessingManualTest
         {
             //newDraw();
             //newDraw2();
-            newDraw3();
+            //newDraw3();
+            newDraw4();
+        }
+
+        private void newDraw4()
+        {
+            background(51);
+            
+
+            
+
+            stroke(200, 0, 100);
+            fill(200, 0, 100);            
+            textSize(25);
+
+            
+            text($"myfonts.count: {myfonts.Count}", 50, 50);
+            text($"myfonts[0]: {myfonts[0]}", 60, 80);
+            text($"myfonts[10]: {myfonts[10]}", 70, 110);
+            
         }
 
         private void newDraw3()
         {
             background(51);
+
+            
 
             stroke(180);
             fill(200, 0, 100);
@@ -39,7 +62,7 @@ namespace dotnetProcessingManualTest
             textAlign(CENTER);
             text("EFGH", 50, 30);
             textAlign(LEFT);
-            text("IJKL", 50, 50);
+            text("IJKL", 50, 50);           
 
 
             fill(100, 0, 200);
@@ -166,11 +189,6 @@ namespace dotnetProcessingManualTest
             line(10, 100, 10, 140);
             line(10+ textWidth(meutexto), 100, 10+ textWidth(meutexto), 140);
 
-
-            
-
-
-
         }
 
         private void newDraw()
@@ -212,6 +230,8 @@ namespace dotnetProcessingManualTest
         public override void Setup()
         {
             size(500, 500);         
+
+            myfonts = PFont.List();            
         }
     }
 }

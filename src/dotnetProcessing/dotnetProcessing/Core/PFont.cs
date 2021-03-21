@@ -77,6 +77,7 @@ namespace dotnetProcessing.Core
         {
             if (loadedFonts == null)
             {
+                loadedFonts = new List<string>();
                 using (InstalledFontCollection installedFonts = new InstalledFontCollection())
                 {
                     foreach (FontFamily fontFamily in installedFonts.Families)
